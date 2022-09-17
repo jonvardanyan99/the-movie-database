@@ -3,11 +3,11 @@ import styles from './styles.module.scss';
 export const Footer = () => {
     return (
         <footer className={styles.footer}>
+            <div>
+                <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="img" />
+                <button>JOIN THE COMMUNITY</button>
+            </div>
             <section>
-                <div>
-                    <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt="img" />
-                    <button>JOIN THE COMMUNITY</button>
-                </div>
                 <div>
                     <h3>The Basics</h3>
                     <ul>

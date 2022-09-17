@@ -4,7 +4,6 @@ import { FreeToWatch } from './components/FreeToWatch';
 import { Trailers } from './components/Trailers';
 import { Trending } from './components/Trending';
 import { Join } from './components/Join';
-import { LeaderBoard } from './components/LeaderBoard';
 
 import styles from './styles.module.scss';
 
@@ -19,7 +18,6 @@ export const Home = () => {
                 <Trailers />
                 <Trending />
                 <Join />
-                <LeaderBoard />
             </div>
         </section>
     )

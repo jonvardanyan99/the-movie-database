@@ -1,5 +1,7 @@
 .welcome {
-    background-image: linear-gradient(to right, rgba(3, 37, 65) 0%, rgba(3, 37, 65, 0) 100%), url("https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/oE6bhqqVFyIECtBzqIuvh6JdaB5.jpg");
+    background-image: linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%), url("https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,032541,01b4e4)/oE6bhqqVFyIECtBzqIuvh6JdaB5.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     padding: 80px 40px 90px 40px;
 
@@ -41,11 +43,25 @@
             color: #fff;
             font-size: 15px;
             font-weight: 700;
+            cursor: pointer;
 
             &:hover {
-                cursor: pointer;
                 color: rgba(3, 37, 65, 1);
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .welcome {
+        padding: 80px 20px 90px 20px;
+
+        > h2 {
+            font-size: 37px;
+        }
+
+        > h3 {
+            font-size: 21px;
         }
     }
 }

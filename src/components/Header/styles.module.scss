@@ -4,6 +4,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
 
     > div {
         width: 1300px;
@@ -22,7 +27,7 @@
             }
 
             &:nth-of-type(2) {
-                width: 310px;
+                width: 240px;
             }
 
             > li {
@@ -38,43 +43,75 @@
                 }
             }
     
-            > .language {
-                border: 1px solid white;
-                border-radius: 3px;
-                padding: 2px 5px;
-                cursor: pointer;
+            > .logo {
+                > a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
-                &:hover {
-                    background-color: white;
-                    transition-duration: 0.1s;
-                    transition-timing-function: linear;
-
-                    > a {
-                        color: black;
+                    > img {
+                        width: 154px;
+                        height: 20px;
+                        object-fit: contain;
                     }
                 }
-    
-                > a {
-                    text-decoration: none;
-                    color: white;
-                    font-size: 14px;
+            }
+
+            > .search {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                > img {
+                    width: 29px;
+                    height: 29px;
+                    object-fit: contain;
                 }
             }
 
-            .logo {
-                width: 154px;
-                height: 20px;
-            }
+            > .menu {
+                display: none;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
 
-            .plus {
-                width: 22px;
-                height: 22px;
+                > img {
+                    width: 30px;
+                    height: 26px;
+                    object-fit: contain;
+                }
             }
+        }
+    }
+}
 
-            .search {
-                width: 29px;
-                height: 29px;
+@media only screen and (max-width: 970px) {
+    .header {
+        > div {
+            > ul {
+                width: auto !important;
+
+                &:nth-of-type(2) {
+                    justify-content: flex-end;
+                }
+
+                > .link, > .search {
+                    display: none;
+                }
+
+                > .menu {
+                    display: flex;
+                } 
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .header {
+        > div {
+            padding: 0 20px;
         }
     }
 }

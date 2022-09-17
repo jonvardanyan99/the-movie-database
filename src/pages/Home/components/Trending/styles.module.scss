@@ -1,12 +1,17 @@
 .trending {
     padding: 30px 0 0 30px;
     position: relative;
-    overflow: hidden;
 
     > img {
         position: absolute;
         left: 0;
         bottom: 0;
-        z-index: -3;
+        z-index: -1;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .trending {
+        padding: 30px 20px 0 20px;
     }
 }

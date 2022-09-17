@@ -5,36 +5,41 @@
     padding-top: 50px;
     padding-bottom: 100px;
 
+    > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        > img {
+            width: 130px;
+            height: 94px;
+            object-fit: cover;
+            margin-bottom: 40px;
+        }
+
+        > button {
+            color: rgba(1, 180, 228, 1);
+            background-color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid white;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    }
+
     > section {
         display: flex;
+        flex-wrap: wrap;
+        padding-top: 40px;
+        margin-left: 40px;
 
         > div {
-            margin-left: 40px;
-            margin-top: 40px;
+            margin-right: 40px;
 
-            &:first-child {
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-            }
-
-            > img {
-                width: 130px;
-                height: 94px;
-                object-fit: cover;
-                margin-bottom: 40px;
-            }
-
-            > button {
-                color: rgba(1, 180, 228, 1);
-                background-color: white;
-                font-size: 18px;
-                font-weight: bold;
-                border: 2px solid white;
-                border-radius: 5px;
-                padding: 8px 16px;
-                cursor: pointer;
+            &:last-child {
+                margin-right: 0;
             }
 
             > h3 {
@@ -54,6 +59,27 @@
                         font-size: 17px;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 930px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+
+        > section {
+            margin-left: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+            justify-content: space-around;
+            width: 100%;
+            
+            > div {
+                width: 131px;
+                margin-right: 5px;
+                margin-bottom: 20px;
             }
         }
     }
