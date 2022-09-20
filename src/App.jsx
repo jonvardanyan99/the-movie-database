@@ -10,7 +10,7 @@ import './App.scss';
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/the-movie-database">
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
