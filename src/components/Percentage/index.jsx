@@ -45,7 +45,7 @@ export const Percentage = ({ percent }) => {
             },
         });
 
-        bar.animate(percent);
+        bar.animate(percent / 100);
 
         return () => {
             bar.destroy();

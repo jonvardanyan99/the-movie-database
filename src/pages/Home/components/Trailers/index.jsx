@@ -1,63 +1,27 @@
+import { useState, useEffect } from 'react';
+
 import { CategorySwitch } from '../../../../components/CategorySwitch';
-import { useState } from 'react';
+import { TMDB_API_KEY } from '../../../../configs';
 import playIcon from '../../../../assets/icons/play.png';
+import { Loader } from '../../../../components/Loader';
 
 import styles from './styles.module.scss';
 
 const categories = [
     'Streaming',
-    'On TV',
-    'For Rent',
     'In Theatres',
 ];
 
-const trailers = [
-    {
-        id: 1,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/4arosFsAEZIDpzZhkm6q1yxYi2f.jpg',
-        name: 'Vengeance Is Mine, All Others Pay Cash',
-        title: 'Arrow Trailer',
-    },
-    {
-        id: 2,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/s5svcTbGcdTkA3cj7pCfy1rxy2O.jpg',
-        name: "My Best Friend's Wedding",
-        title: 'Official Trailer',
-    },
-    {
-        id: 3,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/56v2KjBlU4XaOv9rVYEQypROD7P.jpg',
-        name: 'Stranger Things',
-        title: 'Stranger Things 4 | Volume 2 Trailer | Netflix',
-    },
-    {
-        id: 4,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/4OjoH07cxYQbnGiJzJxto0NUejH.jpg',
-        name: 'Jerry & Marge Go Large',
-        title: 'Now Streaming',
-    },
-    {
-        id: 5,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/vHTuFN4uN1jD1xQWHnOft5dLvL5.jpg',
-        name: 'Westworld',
-        title: 'Season 4 Official Trailer',
-    },
-    {
-        id: 6,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/nevEGeib1T18PgUWlaS9lM8TsgQ.jpg',
-        name: 'Joel Kim Booster: Psychosexual',
-        title: 'Official Trailer',
-    },
-    {
-        id: 7,
-        src: 'https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/7dzE7MywqLklIa3EdmVcIBXWDQs.jpg',
-        name: 'To Sir, with Love',
-        title: 'Official Trailer',
-    },
-];
-
 export const Trailers = () => {
-    const [activeTrailer, setActiveTrailer] = useState(trailers[0]);
+    const [trailers, setTrailers] = useState([]);
+    const [activeTrailer, setActiveTrailer] = useState();
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (trailers.length > 0) {
+            setActiveTrailer(trailers[0])
+        }
+    }, [trailers])
 
     const handleTrailerHover = (trailer) => {
         if (activeTrailer.id !== trailer.id) {
@@ -65,20 +29,58 @@ export const Trailers = () => {
         }
     };
 
+    const handleDataChange = category => {
+        if (category === categories[0]) {
+            setLoading(true);
+
+            fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`)
+                .then(response => response.json())
+                .then(data => {
+                    const trailers = data.results.map(result => ({
+                        id: result.id,
+                        name: result.title,
+                        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
+                    }))
+                    setTrailers(trailers);
+
+                    setLoading(false);
+                })
+        } else if (category === categories[1]) {
+            setLoading(true);
+
+            fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`)
+                .then(response => response.json())
+                .then(data => {
+                    const trailers = data.results.map(result => ({
+                        id: result.id,
+                        name: result.title,
+                        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
+                    }))
+                    setTrailers(trailers);
+
+                    setLoading(false);
+                })
+        }
+    }
+
     return (
-        <article className={styles.trailers} style={{ backgroundImage: `linear-gradient(to right, rgba(3, 37, 65, 0.75) 0%, rgba(3, 37, 65, 0.75) 100%), url(${activeTrailer.src})` }}>
-            <CategorySwitch secondary title="Latest Trailers" categories={categories} />
+        <article className={styles.trailers} style={{ backgroundImage: `linear-gradient(to right, rgba(3, 37, 65, 0.75) 0%, rgba(3, 37, 65, 0.75) 100%), url(${activeTrailer?.photo})` }}>
+            <CategorySwitch secondary title="Latest Trailers" categories={categories} onChange={handleDataChange} />
             <section>
-                {trailers.map(trailer => (
-                    <div key={trailer.id} onMouseOver={() => handleTrailerHover(trailer)}>
-                        <div>
-                            <img src={trailer.src} alt="img" />
-                            <img src={playIcon} alt="img" />
+                {
+                    loading ? <Loader cssOverride={{ marginTop: '20px' }} /> :
+
+                    trailers.map(trailer => (
+                        <div key={trailer.id} onMouseOver={() => handleTrailerHover(trailer)}>
+                            <div>
+                                <img src={trailer.photo} alt="img" />
+                                <img src={playIcon} alt="img" />
+                            </div>
+                            <h2>{trailer.name}</h2>
+                            <h3>Official Trailer</h3>
                         </div>
-                        <h2>{trailer.name}</h2>
-                        <h3>{trailer.title}</h3>
-                    </div>
-                ))}
+                    ))
+                }
             </section>
         </article>
     )

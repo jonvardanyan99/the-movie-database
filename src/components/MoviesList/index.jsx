@@ -11,7 +11,7 @@ export const MoviesList = ({ movies }) => {
                 <div key={movie.id}>
                     <img src={movie.photo} alt="movie" />
                     <div>
-                        <Percentage percent={movie.popularity || 0.1} /> {/* todo */}
+                        <Percentage percent={movie.popularity} />
                         <h2>{movie.name}</h2>
                         <p>{movie.date}</p>
                     </div>
@@ -19,7 +19,7 @@ export const MoviesList = ({ movies }) => {
             ))}
         </section>
     )
-}
+};
 
 MoviesList.propTypes = {
     movies: PropTypes.arrayOf(PropTypes.object).isRequired,
