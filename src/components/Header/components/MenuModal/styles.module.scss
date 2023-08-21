@@ -12,7 +12,7 @@
         height: 29px;
         object-fit: contain;
         cursor: pointer;
-        margin: 15px 0 30px 15px;
+        margin: 20px 0 30px 20px;
     }
 
     > ul {
@@ -25,9 +25,46 @@
             flex-direction: column;
             margin-top: 10px;
             padding: 0;
+            transition-timing-function: ease-in;
 
             > li {
                 margin: 5px 0;
+                text-align: center;
+                color: rgb(3, 37, 65);
+
+                &:hover {
+                    > ul {
+                        display: block;
+                        transition-timing-function: ease-in;
+                    }
+                }
+    
+                > ul {
+                    cursor: auto;
+                    display: none;
+                    background-color: #F0F0F0;
+                    width: 173px;
+                    padding: 8px 0;
+                    border-radius: 4px;
+    
+                    > a {
+                        text-decoration: none;
+                        color: black;
+    
+                        > li {
+                            list-style: none;
+                            padding: 5px 0;
+                            padding-right: 0;
+                            font-weight: 400;
+                            cursor: pointer;
+    
+                            &:hover {
+                                background-color: white;
+                                transition: color 0.05s ease-in;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -50,10 +87,16 @@
             justify-content: center;
             align-items: center;
 
-            > img {
-                width: 154px;
-                height: 20px;
-                object-fit: contain;
+            > a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                > img {
+                    width: 154px;
+                    height: 20px;
+                    object-fit: contain;
+                }
             }
         }
 
@@ -66,7 +109,108 @@
                 width: 29px;
                 height: 29px;
                 object-fit: contain;
+                transition-timing-function: ease-in;
             }
+        }
+    }
+
+    > section {
+        margin-top: 10px;
+        transition-timing-function: ease-in;
+
+        > a {
+            color: black;
+            text-decoration: none;
+        }
+
+        div {
+            border-bottom: 1px solid rgba(227, 227, 227, 1);
+            padding: 0 20px;
+
+            > label {
+                display: flex;
+                align-items: center;
+
+                > img {
+                    width: 16px;
+                    height: 16px;
+                    object-fit: cover;
+                }
+        
+                > div {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    padding: 0;
+                    margin-left: 12px;
+
+                    > input {
+                        width: 100%;
+                        padding: 12px 0;
+                        font-size: 13px;
+                        font-style: italic;
+                        color: #acacac;
+                        outline: none;
+                        border: none;
+                
+                        &::placeholder {
+                            color: #acacac;
+                        }
+                    }
+
+                    > img {
+                        width: 26px;
+                        height: 26px;
+                        object-fit: cover;
+                        cursor: pointer;
+                        padding: 5px;
+                        filter: brightness(85%);
+                        transition: filter 0.05s ease-in;
+
+                        &:hover {
+                            filter: brightness(0%);
+                        }
+                    }
+                }
+            }
+        }
+
+        .searched {
+            display: flex;
+            align-items: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+            transition-property: background-color;
+            transition-duration: 0.1s;
+            transition-timing-function: ease-in;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+
+            > img {
+                width: 16px;
+                height: 16px;
+                object-fit: cover;
+            }
+
+            > p {
+                font-weight: 600;
+                margin-left: 6px;
+
+                > span {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        > .error {
+            padding: 20px 0;
+            font-weight: 700;
+            font-size: 19px;
+            text-align: center;
+            color: rgba(33,37,41,0.5);
         }
     }
 }
