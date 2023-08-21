@@ -8,7 +8,7 @@ export const CategorySwitch = ({ title, categories, secondary = false, onChange 
 
     useEffect(() => {
         onChange(activeCategory);
-    }, [activeCategory])
+    }, [activeCategory, onChange]);
 
     return (
         <div className={`${styles['category-switch']} ${secondary ? styles['category-switch--secondary'] : ''}`}>
@@ -33,4 +33,4 @@ CategorySwitch.propTypes = {
     categories: PropTypes.arrayOf(PropTypes.string).isRequired,
     secondary: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
-}
+};
