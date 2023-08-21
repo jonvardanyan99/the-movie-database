@@ -35,4 +35,4 @@ Modal.propTypes = {
     visible: PropTypes.bool.isRequired,
     children: PropTypes.object.isRequired,
     className: PropTypes.string,
-}
+};
