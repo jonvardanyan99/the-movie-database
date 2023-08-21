@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.module.scss';
 
-export const Percentage = ({ percent }) => {
+export const Percentage = ({ percent, className }) => {
     const containerRef = useRef(null);
 
     useEffect(() => {
+        containerRef.current.classList.add(styles['percentage-circle'], className);
+
         const bar = new Circle(containerRef.current, {
             strokeWidth: 7,
             trailWidth: 15,
@@ -36,27 +38,24 @@ export const Percentage = ({ percent }) => {
             step: function(state, circle) {
                 circle.path.setAttribute('stroke', state.color);
 
-                var value = Math.round(circle.value() * 100);
-                if (value === 0) {
-                    circle.setText('');
-                } else {
-                    circle.setText(`<span>${value}<sup style="font-size: 8px; margin-left: 1px">%</sup></span>`);
-                }
+                var value = Math.round(circle.value());
+                circle.setText(`<span>${value}<sup style="font-size: 8px; margin-left: 1px">%</sup></span>`);
             },
         });
 
-        bar.animate(percent / 100);
+        bar.animate(percent);
 
         return () => {
             bar.destroy();
         };
-    }, [percent]);
+    }, [className, percent]);
 
     return (
-        <div ref={containerRef} className={styles['percentage-circle']} />
+        <div ref={containerRef} />
     );
 };
 
 Percentage.propTypes = {
     percent: PropTypes.number.isRequired,
-}
+    className: PropTypes.string,
+};
