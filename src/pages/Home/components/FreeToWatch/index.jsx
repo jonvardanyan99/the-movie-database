@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import format from 'date-fns/format';
 
 import { CategorySwitch } from '../../../../components/CategorySwitch';
-import { MoviesList } from '../../../../components/MoviesList';
-import { TMDB_API_KEY } from '../../../../configs';
-import { Loader } from '../../../../components/Loader';
+import { FilmsHorizontalList } from '../../../../components/FilmsHorizontalList';
+import { useQuery } from '../../../../hooks/useQuery';
 
 import styles from './styles.module.scss';
 
@@ -14,43 +13,47 @@ const categories = [
 ];
 
 export const FreeToWatch = () => {
-    const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-    const handleDataChange = category => {
-        setLoading(true);
+    let URL;
+    let nameKey;
+    let dateKey;
+    let mediaType;
 
-        let URL;
-        let dateKey;
+    if (activeCategory === categories[0]) {
+        URL = '/movie/top_rated';
+        nameKey = 'title';
+        dateKey = 'release_date';
+        mediaType = 'movie';
+    } else if (activeCategory === categories[1]) {
+        URL = '/tv/top_rated';
+        nameKey = 'name';
+        dateKey = 'first_air_date';
+        mediaType = 'tv';
+    };
 
-        if (category === categories[0]) {
-            URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
-            dateKey = 'release_date';
-        } else if (category === categories[1]) {
-            URL = `https://api.themoviedb.org/3/tv/top_rated?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
-            dateKey = 'first_air_date';
-        }
+    const {loading, data} = useQuery({ url: URL, params: '&language=en-US&page=1' });
+    
+    const films = data?.results.map(result => ({
+        id: result.id,
+        name: result[nameKey],
+        date: result[dateKey] ? format(new Date(result[dateKey]), 'dd MMM y') : null,
+        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
+        popularity: result.vote_average * 10,
+        mediaType: mediaType,
+    })) || [];
 
-        fetch(URL)
-            .then(response => response.json())
-            .then(data => {
-                const movies = data.results.map(result => ({
-                    id: result.id,
-                    name: result.title,
-                    date: format(new Date(result[dateKey]), 'dd MMM y'),
-                    photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
-                    popularity: result.vote_average * 10,
-                }))
-                setMovies(movies);
-
-                setLoading(false);
-            })
-    }
+    const handleCategoryChange = useCallback(category => {
+        setActiveCategory(category);
+    }, []);
 
     return (
-        <article className={styles['free-to-watch']}>
-            <CategorySwitch title="Free To Watch" categories={categories} onChange={handleDataChange} />
-            {loading ? <Loader cssOverride={{ marginTop: '20px' }} /> : <MoviesList movies={movies} />}
-        </article>
-    )
-}
+        <div className={styles['free-to-watch']}>
+            <CategorySwitch title="Free To Watch" categories={categories} onChange={handleCategoryChange} />
+            <FilmsHorizontalList
+                loading={loading}
+                data={films}
+            />
+        </div>
+    );
+};

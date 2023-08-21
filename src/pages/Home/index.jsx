@@ -7,10 +7,9 @@ import { Join } from './components/Join';
 
 import styles from './styles.module.scss';
 
-
 export const Home = () => {
     return (
-        <section className={styles.home}>
+        <div className={styles.home}>
             <div>
                 <Welcome />
                 <Popular />
@@ -19,6 +18,6 @@ export const Home = () => {
                 <Trending />
                 <Join />
             </div>
-        </section>
-    )
-}
+        </div>
+    );
+};

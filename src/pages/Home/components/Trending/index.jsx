@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import format from 'date-fns/format';
 
 import { CategorySwitch } from '../../../../components/CategorySwitch';
-import { MoviesList } from '../../../../components/MoviesList';
-import { TMDB_API_KEY } from '../../../../configs';
-import { Loader } from '../../../../components/Loader';
+import { FilmsHorizontalList } from '../../../../components/FilmsHorizontalList';
+import { useQuery } from '../../../../hooks/useQuery';
 
 import styles from './styles.module.scss';
 
@@ -14,52 +13,49 @@ const categories = [
 ];
 
 export const Trending = () => {
-    const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-    const handleDataChange = category => {
-        if (category === categories[0]) {
-            setLoading(true);
+    let URL;
+    let nameKey;
+    let dateKey;
 
-            fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API_KEY}&language=en-US&page=1`)
-                .then(response => response.json())
-                .then(data => {
-                    const movies = data.results.map(result => ({
-                        id: result.id,
-                        name: result.title,
-                        date: format(new Date(result.release_date), 'dd MMM y'),
-                        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
-                        popularity: result.vote_average * 10,
-                    }))
-                    setMovies(movies);
+    if (activeCategory === categories[0]) {
+        URL = '/trending/movie/day';
+        nameKey = 'title';
+        dateKey = 'release_date';
+    } else if (activeCategory === categories[1]) {
+        URL = '/trending/movie/week';
+        nameKey = 'name';
+        dateKey = 'first_air_date';
+    };
 
-                    setLoading(false);
-                })
-        } else if (category === categories[1]) {
-            setLoading(true);
+    const {loading, data} = useQuery({ url: URL, params: '&language=en-US&page=1' });
 
-            fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_API_KEY}&language=en-US&page=1`)
-                .then(response => response.json())
-                .then(data => {
-                    const movies = data.results.map(result => ({
-                        id: result.id,
-                        name: result.title,
-                        date: format(new Date(result.release_date), 'dd MMM y'),
-                        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
-                        popularity: result.vote_average * 10,
-                    }))
-                    setMovies(movies);
+    const films = data?.results.map(result => ({
+        id: result.id,
+        name: result[nameKey],
+        date: result[dateKey] ? format(new Date(result[dateKey]), 'dd MMM y') : null,
+        photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
+        popularity: result.vote_average * 10,
+        mediaType: result.media_type,
+    })) || [];
 
-                    setLoading(false);
-                })
-        }
-    }
+    const handleDataChange = useCallback(category => {
+        setActiveCategory(category); 
+    }, []);
 
     return (
-        <article className={styles.trending}>
+        <div
+            className={styles.trending}
+            style={{
+                backgroundImage: loading ? '' : 'url(https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg)',
+            }}
+        >
             <CategorySwitch title="Trending" categories={categories} onChange={handleDataChange} />
-            {loading ? <Loader cssOverride={{ marginTop: '20px' }} /> : <MoviesList movies={movies} />}
-            {loading ? null : <img src="https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg" alt="trending" />}
-        </article>
-    )
-}
+            <FilmsHorizontalList
+                loading={loading}
+                data={films}
+            />
+        </div>
+    );
+};

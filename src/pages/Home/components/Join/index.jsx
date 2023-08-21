@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 
 export const Join = () => {
     return (
-        <article className={styles.join}>
+        <div className={styles.join}>
             <h2>Join Today</h2>
             <section>
                 <div>
@@ -22,6 +22,6 @@ export const Join = () => {
                     <li>Contribute to and improve our database</li>
                 </ul>
             </section>
-        </article>
+        </div>
     )
 }
