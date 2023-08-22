@@ -90,10 +90,10 @@ export const Header = () => {
                 </ul>
                 <ul>
                     <li className={styles.link}>
-                        <a href="">Login</a>
+                        <a href="https://www.themoviedb.org/login">Login</a>
                     </li>
                     <li className={styles.link}>
-                        <a href="">Join TMDB</a>
+                        <a href="https://www.themoviedb.org/signup">Join TMDB</a>
                     </li>
                     <li className={styles.search} onClick={toggleSearching}>
                         {searchVisible ? 
