@@ -1,0 +1,113 @@
+.credits {
+    margin-top: 20px;
+    position: relative;
+
+    > ul {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+
+        > li {
+            list-style: none;
+            cursor: pointer;
+            transition: color 50ms ease-in-out;
+        }
+
+        > .clear {
+            padding: 8px;
+            margin-right: 10px;
+            color: rgba(1, 180, 228, 1);
+
+            &:hover {
+                color: rgba(30, 213, 169, 1);
+            }
+        }
+
+        > .media-type, > .department {
+            padding: 8px 25px 8px 8px;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 6px solid black;
+                transition: border-top-color 50ms ease-in-out;
+            }
+
+            &:hover {
+                color: rgba(33, 37, 41, 0.7);
+
+                &::after {
+                    border-top-color: rgba(33, 37, 41, 0.7);
+                }
+            }
+
+            > ul {
+                margin-top: 8px;
+                cursor: auto;
+                color: black;
+                position: absolute;
+                left: -2px;
+                width: 173px;
+                padding: 8px 0;
+                background-color: white;
+                border: 1px solid rgba(0,0,0,0.15);
+                border-radius: 4px;
+
+                > li {
+                    cursor: pointer;
+                    list-style: none;
+                    padding: 5px 0 5px 24px;
+                    transition: color 50ms ease-in-out;
+                    
+                    &:hover {
+                        background-color: #F0F0F0;
+                    }
+
+                    > span {
+                        font-weight: 300;
+                        margin-left: 3px;
+                    }
+                }
+            }
+        }
+
+        > .media-type {
+            margin-right: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .credits {
+        > ul {
+            > .media-type, > .department {
+                > ul {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    .credits {
+        > ul {
+            > .media-type, > .department {
+                > ul {
+                    width: 135px;
+
+                    > li {
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
