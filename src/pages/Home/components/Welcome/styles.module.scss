@@ -31,19 +31,21 @@
             outline: none;
         }
 
-        > button {
+        > a {
             position: absolute;
             top: 0;
             right: -1px;
-            width: 100px;
-            height: 46px;
-            border: none;
+            text-decoration: none;
             background: linear-gradient(to right, rgba(30, 213, 169, 1) 0%, rgba(1, 180, 228, 1) 100%);
             border-radius: 30px;
             color: #fff;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 700;
-            cursor: pointer;
+            width: 100px;
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             &:hover {
                 color: rgba(3, 37, 65, 1);
