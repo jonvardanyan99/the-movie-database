@@ -11,7 +11,7 @@ export const Join = () => {
                         watch next</em>—regardless if it's in theatres, on TV or available on popular streaming services like 
                         Netflix, Amazon Prime Video, and hayu.
                     </p>
-                    <button>Sign Up</button>
+                    <a href="https://www.themoviedb.org/signup">Sign Up</a>
                 </div>
                 <ul>
                     <li>Enjoy TMDB ad free</li>
