@@ -1,0 +1,61 @@
+.crew-data-display {
+    margin-bottom: 30px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    > h4 {
+        margin-bottom: 8px;
+    }
+    
+    > div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    
+        &:last-child {
+            margin-bottom: 0;
+        }
+    
+        > a {
+            margin-right: 25px;
+
+            > img {
+                width: 66px;
+                height: 66px;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+        
+            > .no-image {
+                width: 66px;
+                height: 66px;
+                background-color: #DBDBDB;
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        
+                > img {
+                    width: 36px;
+                    height: 36px;
+                    object-fit: cover;
+                }
+            }
+        }
+    
+        > div:last-child {
+            > a {
+                > h4 {
+                    display: inline-block;
+                    color: black;
+                }
+            }
+    
+            > p {
+                font-size: 14.5px;
+            }
+        }
+    }
+}

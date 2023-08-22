@@ -1,0 +1,131 @@
+.people-info {
+    padding: 30px;
+    padding-left: 300px;
+
+    > section {
+        display: flex;
+        justify-content: space-between;
+        max-width: 900px;
+
+        > div {
+            > h2 {
+                font-size: 22px;
+                font-weight: 600;
+                margin-bottom: 20px;
+
+                > span {
+                    font-weight: 400;
+                    opacity: 0.6;
+                }
+            }
+        }
+
+        > .cast {
+            > div {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                > a {
+                    margin-right: 25px;
+
+                    > img {
+                        width: 66px;
+                        height: 66px;
+                        object-fit: cover;
+                        border-radius: 4px;
+                    }
+    
+                    > .no-image {
+                        width: 66px;
+                        height: 66px;
+                        background-color: #DBDBDB;
+                        border-radius: 8px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+    
+                        > img {
+                            width: 36px;
+                            height: 36px;
+                            object-fit: cover;
+                        }
+                    }
+                }
+
+                > div:last-child {
+                    > a {
+                        > h4 {
+                            color: black;
+                            display: inline-block;
+                        }
+                    }
+
+                    > p {
+                        font-size: 14.5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .people-info {
+        padding-left: 200px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .people-info {
+        padding-left: 100px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .people-info {
+        padding-left: 30px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .people-info {
+        padding-left: 30px;
+
+        > section {
+            flex-direction: column;
+
+            > div {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                > div {
+                    width: 240px;
+                }
+            }
+
+            > .cast {
+                border-bottom: 1px solid #d7d7d7;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .people-info {
+        > section {
+            > div {
+                > div {
+                    width: 240px;
+                }
+            }
+        }
+    }
+}
