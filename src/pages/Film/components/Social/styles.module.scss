@@ -1,0 +1,243 @@
+.social {
+    padding: 30px 0;
+    border-bottom: 1px solid #d7d7d7;
+
+    > div {
+        display: flex;
+
+        > h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-right: 50px;
+        }
+
+        > ul {
+            display: flex;
+            flex-wrap: wrap;
+            
+            > li {
+                list-style: none;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                margin-top: 10px;
+
+                &:first-child {
+                    margin-right: 24px;
+                }
+
+                > span {
+                    color: gray;
+                }
+
+                &.active-social {
+                    border-bottom: 4px solid black;
+                    padding-bottom: 5px;
+                }
+            }
+        }
+    }
+
+    > section {
+        > p {
+            font-size: 18px;
+            font-weight: 600;
+            display: inline-block;
+            cursor: pointer;
+    
+            &:hover {
+                color: rgba(127, 127, 127, 1);
+            }
+        }
+    }
+
+    > .reviews {
+        > div {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid rgb(227, 227, 227);
+            box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+            border-radius: 8px;
+
+            > div:nth-of-type(1) {
+                display: flex;
+                align-items: center;
+    
+                > img {
+                    border-radius: 50%;
+                    width: 64px;
+                    height: 64px;
+                    object-fit: cover;
+                    cursor: pointer;
+                    margin-right: 20px;
+                }
+    
+                > div {
+                    > div {
+                        display: flex;
+                        align-items: center;
+    
+                        > h3 {
+                            font-size: 21px;
+                            font-weight: 700;
+                            margin-right: 15px;
+                            cursor: pointer;
+    
+                            &:hover {
+                                color: rgba(127, 127, 127, 1);
+                            }
+                        }
+    
+                        > div {
+                            display: flex;
+                            align-items: center;
+                            background-color: black;
+                            padding: 3px 10px;
+                            border-radius: 8px;
+    
+                            > img {
+                                width: 14px;
+                                height: 14px;
+                                object-fit: cover;
+                                filter: invert(1);
+                                margin-right: 2px;
+                            }
+    
+                            > span {
+                                font-size: 15px;
+                                color: white;
+                            }
+                        }
+                    }
+    
+                    > h5 {
+                        font-size: 15px;
+                        font-weight: 300;
+    
+                        > span {
+                            font-weight: 500;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+    
+            > div:nth-of-type(2) {
+                padding: 20px 20px 20px 84px;
+    
+                > p {
+                    > a {
+                        color: black;
+    
+                        &:hover {
+                            color: rgba(0,0,0,0.5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    > .discussions {
+        > div {
+            margin: 20px 0;
+            
+            > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 5px 0;
+                padding: 12px 20px;
+                border: 1px solid rgb(227, 227, 227);
+                box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+                border-radius: 8px;
+    
+                &:first-child {
+                    > div {
+                        > p {
+                            > span {
+                                font-weight: normal;
+                            }
+                        }
+                    }
+                }
+    
+                > div {
+                    display: flex;
+                    align-items: center;
+    
+                    &:first-child {
+                        width: 500px;
+                    }
+    
+                    &:last-child {
+                        flex-direction: column;
+                        align-items: flex-end;
+                        width: 200px;
+                    }
+    
+                    > img {
+                        width: 32px;
+                        height: 32px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+    
+                    > div {
+                        background-color: rgba(1, 119, 210, 1);
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        color: white;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+    
+                    > h4 {
+                        font-weight: normal;
+                        margin-left: 10px;
+                    }
+                }
+    
+                p, span {
+                    font-weight: 300;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    > p {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .social {
+        > .reviews {
+            flex-direction: column;
+            align-items: unset;
+            padding: 20px;
+
+            > div {
+                > div:nth-of-type(1) {
+                    flex-direction: column;
+                    align-items: unset;
+
+                    > img {
+                        margin-right: 0;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                > div:nth-of-type(2) {
+                    padding: 0;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+}
