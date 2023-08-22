@@ -16,25 +16,19 @@ export const Trending = () => {
     const [activeCategory, setActiveCategory] = useState(categories[0]);
 
     let URL;
-    let nameKey;
-    let dateKey;
 
     if (activeCategory === categories[0]) {
         URL = '/trending/movie/day';
-        nameKey = 'title';
-        dateKey = 'release_date';
     } else if (activeCategory === categories[1]) {
         URL = '/trending/movie/week';
-        nameKey = 'name';
-        dateKey = 'first_air_date';
     };
 
     const {loading, data} = useQuery({ url: URL, params: '&language=en-US&page=1' });
 
     const films = data?.results.map(result => ({
         id: result.id,
-        name: result[nameKey],
-        date: result[dateKey] ? format(new Date(result[dateKey]), 'dd MMM y') : null,
+        name: result.title,
+        date: result.release_date ? format(new Date(result.release_date), 'dd MMM y') : null,
         photo: `https://image.tmdb.org/t/p/w220_and_h330_face${result.poster_path}`,
         popularity: result.vote_average * 10,
         mediaType: result.media_type,
