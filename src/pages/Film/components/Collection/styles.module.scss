@@ -26,17 +26,14 @@
             padding: 9px 22px;
             border-radius: 20px;
             border: none;
+            font-size: 18px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.1s ease-in-out;
     
             &:hover {
-                transition: linear 0.1s;
                 background-color: black;
-            }
-            
-            > p {
-                font-size: 18px;
-                color: white;
-                font-weight: 700;
-                cursor: pointer;
             }
         }
     }

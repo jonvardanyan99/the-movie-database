@@ -38,9 +38,7 @@ export const Collection = ({ id }) => {
                 }}>
                     <h2>Part of the {data.name}</h2>
                     <p>Includes {text}</p>
-                    <button>
-                        <p>VIEW THE COLLECTION</p>
-                    </button>
+                    <button>VIEW THE COLLECTION</button>
                 </div>
             )}
         </div>
