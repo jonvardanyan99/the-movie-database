@@ -61,7 +61,7 @@ export const Overview = ({ loading, id, name, date, genres, runtime, posterPath,
                 }}
             >
                 <div>
-                    <div className={styles['movie-poster']}>
+                    <div className={styles['film-poster']}>
                         {posterPath ?
                         <div
                             style={{ backgroundImage: `url(https://www.themoviedb.org/t/p/w300_and_h450_bestv2${posterPath})` }}
@@ -90,7 +90,7 @@ export const Overview = ({ loading, id, name, date, genres, runtime, posterPath,
                             </div>
                         </div>
                     </div>
-                    <div className={styles['movie-info']}>
+                    <div className={styles['film-info']}>
                         <h2>
                             {name} {date && <span> ({new Date(date).getFullYear()})</span>}
                         </h2>
@@ -103,9 +103,9 @@ export const Overview = ({ loading, id, name, date, genres, runtime, posterPath,
                                     text = genre.name;
                                 };
                                 
-                                return <span key={genre.id} className={styles.genre}>{text}</span>
+                                return <span key={genre.id}>{text}</span>
                             })}
-                            {runtime && <span className={styles.runtime}>{convertTime(runtime)}</span>}
+                            {runtime > 0 && <span className={styles.runtime}>{convertTime(runtime)}</span>}
                         </div>
                         <div>
                             <div>
