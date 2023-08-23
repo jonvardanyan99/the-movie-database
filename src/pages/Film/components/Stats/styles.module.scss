@@ -90,23 +90,21 @@
         }
     }
 
-    > button {
+    > a {
+        display: inline-block;
+        text-decoration: none;
         background-color: black;
-        color: white;
-        border: none;
-        padding: 9px 20px;
-        font-size: 16px;
-        font-weight: 700;
+        padding: 9px 24px;
         border-radius: 20px;
         margin-bottom: 30px;
-        cursor: pointer;
-        transition: background-color, color 50ms ease-in-out;
+        transition: background-color 50ms ease-in-out;
 
         &:hover {
             background-color: lightgray;
-            color: black;
 
             > div {
+                color: black;
+
                 > img {
                     filter: brightness(0) contrast(100%);
                 }
@@ -115,6 +113,11 @@
 
         > div {
             display: flex;
+            align-items: center;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            transition: color 50ms ease-in-out;
 
             > img {
                 width: 16px;

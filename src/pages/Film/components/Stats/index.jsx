@@ -39,12 +39,12 @@ export const Stats = () => {
             </div>
             <p>View Edit History</p>
             <h3>Popularity Trend</h3>
-            <button>
+            <a href="https://www.themoviedb.org/login">
                 <div>
                     <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-217-lock-white-81d0c4a81e3d038565c80391d6a28a49e98bfe9f1fa26e6473feb3b92de5b4d1.svg" alt="lock" />
                     LOGIN TO EDIT
                 </div>
-            </button>
+            </a>
             <div>
                 <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-357-keyboard-4de4fe2896d6ba568aeb8c07d250a99374f086554ffd4b1f7645d69325b979ab.svg" alt="keyboard" />
                 <p>Keyboard Shortcuts</p>
