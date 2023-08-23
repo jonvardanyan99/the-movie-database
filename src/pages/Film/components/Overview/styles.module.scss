@@ -28,7 +28,7 @@
             }
         }
 
-        > .movie-poster {
+        > .film-poster {
             border-radius: 8px;
             overflow: hidden;
             margin-right: 20px;
@@ -129,7 +129,7 @@
             }
         }
 
-        > .movie-info {
+        > .film-info {
             margin-left: 20px;
     
             > h2 {
@@ -163,15 +163,6 @@
                         background-color: black;
                         margin-left: 8px;
                         margin-top: 2.5px;
-                    }
-                }
-
-                > .genre {
-                    cursor: pointer;
-                    transition: color 50ms ease-in-out;
-
-                    &:hover {
-                        color: rgba(0,0,0,0.5);
                     }
                 }
 
@@ -317,11 +308,11 @@
                 }
             }
 
-            > .movie-poster {
+            > .film-poster {
                 margin: 0;
             }
     
-            > .movie-info {
+            > .film-info {
                 margin: 40px 0 0 0;
 
                 > .creator-container {
