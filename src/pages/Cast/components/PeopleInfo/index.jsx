@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
 import { useQuery } from '../../../../hooks/useQuery';
 import { Loader } from '../../../../components/Loader';
@@ -6,9 +7,18 @@ import { Loader } from '../../../../components/Loader';
 import { CrewDataDisplay } from './components/CrewDataDisplay';
 import styles from './styles.module.scss';
 
-export const PeopleInfo = () => {
+export const PeopleInfo = ({ name }) => {
     const params = useParams();
-    const {loading, data} = useQuery({ url: `/${params.mediaType}/${params.id}/credits`, params: '&language=en-US' });
+
+    let endpoint;
+
+    if (params.mediaType === 'movie') {
+        endpoint = 'credits';
+    } else if (params.mediaType === 'tv') {
+        endpoint = 'aggregate_credits';
+    };
+
+    const {loading, data} = useQuery({ url: `/${params.mediaType}/${params.id}/${endpoint}`, params: '&language=en-US' });
 
     for (let i = 0; i < data?.cast.length - 1; i++) {
         for (let j = i + 1; j < data.cast.length; j++) {
@@ -38,8 +48,9 @@ export const PeopleInfo = () => {
             {loading ? <Loader /> : (
                 <section>
                     <div className={styles.cast}>
-                        <h2>Cast <span>{data?.cast.length}</span></h2>
-                        {data?.cast.map(item => (
+                        <h2>{params.mediaType === 'movie' ? 'Cast' : 'Series Cast'} <span>{data?.cast.length}</span></h2>
+                        {data?.cast.length > 0 ?
+                        data.cast.map(item => (
                             <div key={item.id}>
                                 <Link to={`/person/${item.id}`}>
                                     {item.profile_path ? (
@@ -61,19 +72,27 @@ export const PeopleInfo = () => {
                                     <Link to={`/person/${item.id}`}>
                                         <h4>{item.name}</h4>
                                     </Link>
-                                    <p>{item.character}</p>
+                                    <p>
+                                        {params.mediaType === 'movie' ? item.character : item.roles[0].character}
+                                        {params.mediaType === 'tv' && <span> ({item.roles[0].episode_count} {item.roles[0].episode_count > 1 ? 'Episodes' : 'Episode'})</span>}
+                                    </p>
                                 </div>
                             </div>
-                        ))}
+                        )) : <p>There are no cast records added to {name}.</p>}
                     </div>
                     <div>
-                        <h2>Crew <span>{data?.crew.length}</span></h2>
-                        {departments.map((department, index) => (
+                        <h2>{params.mediaType === 'movie' ? 'Crew' : 'Series Crew'} <span>{data?.crew.length}</span></h2>
+                        {data?.crew.length > 0 ?
+                        departments.map((department, index) => (
                             <CrewDataDisplay key={index} department={department} data={data.crew} />
-                        ))}
+                        )) : <p>There are no crew records added to {name}.</p>}
                     </div>
                 </section>
             )}
         </div>
     );
+};
+
+PeopleInfo.propTypes = {
+    name: PropTypes.string.isRequired,
 };
