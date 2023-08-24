@@ -276,17 +276,21 @@
                     margin-top: 10px;
                     margin-right: 200px;
 
-                    > h4 {
-                        cursor: pointer;
-                        transition: color 50ms ease-in-out;
-
-                        &:hover {
-                            color: rgba(0,0,0,0.5);
-                        }
-                    }
-
                     &:last-child {
                         margin-right: 0;
+                    }
+
+                    > a {
+                        text-decoration: none;
+                        color: black;
+
+                        > h4 {
+                            transition: color 50ms ease-in-out;
+    
+                            &:hover {
+                                color: rgba(0,0,0,0.5);
+                            }
+                        }
                     }
                 }
             }

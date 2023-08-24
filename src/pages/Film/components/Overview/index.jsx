@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import format from 'date-fns/format';
 
@@ -136,7 +136,9 @@ export const Overview = ({ loading, id, name, date, genres, runtime, posterPath,
                             <div className={styles['creator-container']}>
                                 {createdBy.map(item => (
                                     <div key={item.id}>
-                                        <h4>{item.name}</h4>
+                                        <Link to={`/person/${item.id}`}>
+                                            <h4>{item.name}</h4>
+                                        </Link>
                                         <p>Creator</p>
                                     </div>
                                 ))}
