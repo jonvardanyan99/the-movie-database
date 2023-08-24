@@ -7,7 +7,16 @@ import styles from './styles.module.scss';
 
 export const Cast = () => {
     const params = useParams();
-    const {loading, data} = useQuery({ url: `/${params.mediaType}/${params.id}/credits`, params: '&language=en-US' });
+
+    let endpoint;
+
+    if (params.mediaType === 'movie') {
+        endpoint = 'credits';
+    } else if (params.mediaType === 'tv') {
+        endpoint = 'aggregate_credits';
+    };
+
+    const {loading, data} = useQuery({ url: `/${params.mediaType}/${params.id}/${endpoint}`, params: '&language=en-US' });
 
     return (
         <div className={styles.cast}>
@@ -38,7 +47,9 @@ export const Cast = () => {
                                         <Link to={`/person/${item.id}`}>
                                             <h4>{item.name}</h4>
                                         </Link>
-                                        <p>{item.character}</p>
+                                        <p>{params.mediaType === 'movie' ? item.character : item.roles[0].character}</p>
+                                        {params.mediaType === 'tv' &&
+                                        <p>{item.roles[0].episode_count} {item.roles[0].episode_count > 1 ? 'Episodes' : 'Episode'}</p>}
                                     </div>
                                 </div>
                             ))
