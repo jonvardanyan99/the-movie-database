@@ -1,24 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
-import { useQuery } from '../../../../hooks/useQuery';
 import { Loader } from '../../../../components/Loader';
 
 import styles from './styles.module.scss';
 
-export const Overview = () => {
+export const Overview = ({ loading, name, date, posterPath }) => {
     const params = useParams();
-    const {loading, data} = useQuery({ url: `/${params.mediaType}/${params.id}`, params: '&language=en-US&page=1' });
-
-    const name = data?.title || data?.name;
-    const date = data?.release_date || data?.first_air_date;
 
     return (
         <div className={styles.overview}>
             {loading ? <Loader /> : (
                 <>
-                    {data?.poster_path && (
+                    {posterPath && (
                         <Link to={`/${params.mediaType}/${params.id}`}>
-                            <img src={`https://www.themoviedb.org/t/p/w58_and_h87_face${data?.poster_path}`} alt={name} />
+                            <img src={`https://www.themoviedb.org/t/p/w58_and_h87_face${posterPath}`} alt={name} />
                         </Link>
                     )}
                     <div>
@@ -26,7 +22,7 @@ export const Overview = () => {
                             <Link to={`/${params.mediaType}/${params.id}`}>
                                 {name}
                             </Link>
-                            {date && <span>({new Date(date).getFullYear()})</span>}
+                            {date && <span> ({new Date(date).getFullYear()})</span>}
                         </h2>
                         <Link to={`/${params.mediaType}/${params.id}`}>
                             <p>← Back to main</p>
@@ -36,4 +32,11 @@ export const Overview = () => {
             )}
         </div>
     );
+};
+
+Overview.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    posterPath: PropTypes.string.isRequired,
 };
