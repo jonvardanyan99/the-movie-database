@@ -2,6 +2,10 @@
     padding: 30px;
     padding-left: 300px;
 
+    > span {
+        margin-right: 300px;
+    }
+
     > section {
         display: flex;
         justify-content: space-between;
@@ -21,6 +25,8 @@
         }
 
         > .cast {
+            margin-right: 30px;
+
             > div {
                 display: flex;
                 align-items: center;
@@ -57,7 +63,7 @@
                     }
                 }
 
-                > div:last-child {
+                > div {
                     > a {
                         > h4 {
                             color: black;
@@ -67,6 +73,10 @@
 
                     > p {
                         font-size: 14.5px;
+
+                        > span {
+                            color: rgba(0,0,0,.5);
+                        }
                     }
                 }
             }
@@ -77,24 +87,40 @@
 @media only screen and (max-width: 1500px) {
     .people-info {
         padding-left: 200px;
+
+        > span {
+            margin-right: 200px;
+        }
     }
 }
 
 @media only screen and (max-width: 1300px) {
     .people-info {
         padding-left: 100px;
+
+        > span {
+            margin-right: 100px;
+        }
     }
 }
 
 @media only screen and (max-width: 800px) {
     .people-info {
         padding-left: 30px;
+
+        > span {
+            margin-right: 0;
+        }
     }
 }
 
 @media only screen and (max-width: 650px) {
     .people-info {
         padding-left: 30px;
+
+        > span {
+            margin-right: 0;
+        }
 
         > section {
             flex-direction: column;
@@ -120,6 +146,10 @@
 
 @media only screen and (max-width: 400px) {
     .people-info {
+        > span {
+            margin-right: 0;
+        }
+
         > section {
             > div {
                 > div {
