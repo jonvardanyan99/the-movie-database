@@ -57,14 +57,18 @@
                     position: absolute;
                 }
 
-                > h4 {
-                    font-weight: 700;
-                    cursor: pointer;
-                    display: inline;
+                > a {
+                    text-decoration: none;
+                    color: black;
+                    transition: color 50ms ease-in-out;
 
                     &:hover {
                         color: rgb(1, 180, 228);
-                        transition-timing-function: ease-out;
+                    }
+
+                    > h4 {
+                        font-weight: 700;
+                        display: inline;
                     }
                 }
 

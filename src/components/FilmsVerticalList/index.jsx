@@ -40,7 +40,9 @@ export const FilmsVerticalList = ({ title, loading, data, handlePageChange, medi
                             </Link>
                             <div>
                                 <Percentage percent={film.vote_average * 10} className={styles['movie-percentage']} />
-                                <h4>{name}</h4>
+                                <Link to={`/${mediaType}/${film.id}`}>
+                                    <h4>{name}</h4>
+                                </Link>
                                 {date && <p>{format(new Date(date), 'dd MMM y')}</p>}
                             </div>
                         </div>
