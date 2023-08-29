@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import format from 'date-fns/format';
 
 import { useQuery } from '../../hooks/useQuery';
@@ -46,13 +46,17 @@ export const Search = () => {
                     movie?.results.length > 0 ? (
                         movie.results.map(item => (
                             <div key={item.id}>
-                                {item.poster_path ?
-                                <img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}`} alt={item.title} /> :
-                                <div className={styles['no-image']}>
-                                    <img src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg' alt={item.title} />
-                                </div>}
+                                <Link to={`/movie/${item.id}`}>
+                                    {item.poster_path ?
+                                    <img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}`} alt={item.title} /> :
+                                    <div className={styles['no-image']}>
+                                        <img src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg' alt={item.title} />
+                                    </div>}
+                                </Link>
                                 <div>
-                                    <h2>{item.title}</h2>
+                                    <Link to={`/movie/${item.id}`}>
+                                        <h2>{item.title}</h2>
+                                    </Link>
                                     {item.release_date && <p>{format(new Date(item.release_date), 'LLLL d, y')}</p>}
                                     {item.overview && <p className={styles.overview}>{item.overview.length > 225 ? `${item.overview.slice(0, 225)}...` : item.overview}</p>}
                                 </div>
