@@ -40,12 +40,12 @@
             &:hover {
                 > span {
                     visibility: visible;
-                    transition: visibility 0.1s ease-in-out;
                 }
             }
 
             > span {
                 visibility: hidden;
+                transition: visibility 50ms ease-in-out;
                 width: 120px;
                 background-color: rgba(3, 37, 65, 1);
                 color: #fff;
@@ -96,7 +96,6 @@
             margin-bottom: 8px;
             height: 30px;
             object-fit: contain;
-            cursor: pointer;
 
             &:last-child {
                 margin-bottom: 0;
