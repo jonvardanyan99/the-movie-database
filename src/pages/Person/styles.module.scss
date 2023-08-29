@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
 
-    > .article1 {
+    > .profile-section {
         > img {
             width: 300px;
             height: 450px;
@@ -122,48 +122,40 @@
             margin-top: 20px;
         }
 
-        > button {
-            padding: 8px 22px;
-            font-size: 16px;
-            background-color: rgb(1, 180, 228);
+        > a {
+            display: inline-block;
+            text-decoration: none;
             color: white;
-            font-weight: 700;
-            border: none;
+            background-color: rgb(1, 180, 228);
+            padding: 9px 24px;
             border-radius: 20px;
+            transition: background-color 0.2s ease-in-out;
             margin-top: 30px;
-            transition: background-color 0.15s ease-in-out;
-
+    
             &:hover {
                 background-color: black;
             }
-
+    
             > div {
                 display: flex;
                 align-items: center;
-                cursor: pointer;
-
+                font-size: 17px;
+                font-weight: 700;
+    
                 > img {
                     width: 16px;
                     height: 16px;
                     object-fit: cover;
-                    filter: invert(100%);
                     margin-right: 6px;
                 }
             }
         }
 
         > .keyboard {
-            width: fit-content;
             opacity: 0.5;
             display: flex;
             align-items: center;
-            cursor: pointer;
             margin: 30px 0;
-            transition: color 0.05s ease-in;
-
-            &:hover {
-                color: rgba(30, 213, 169, 1);
-            }
 
             > img {
                 width: 23px;
@@ -186,7 +178,7 @@
         }
     }
 
-    > .article2 {
+    > .details-section {
         width: 920px;
         margin-left: 30px;
 
@@ -268,7 +260,7 @@
         flex-direction: column;
         align-items: center;
 
-        > .article2 {
+        > .details-section {
             margin-left: 0;
             margin-top: 30px;
         }
@@ -277,7 +269,7 @@
 
 @media only screen and (max-width: 990px) {
     .person {
-        > .article2 {
+        > .details-section {
             width: 90%;
         }
     }
@@ -285,7 +277,7 @@
 
 @media only screen and (max-width: 600px) {
     .person {
-        > .article2 {
+        > .details-section {
             width: 85%;
         }
     }
@@ -293,14 +285,14 @@
 
 @media only screen and (max-width: 400px) {
     .person {
-        > .article1 {
+        > .profile-section {
             > img {
                 width: 250px;
                 height: 400px;
             }
         }
 
-        > .article2 {
+        > .details-section {
             width: 82%;
         }
     }

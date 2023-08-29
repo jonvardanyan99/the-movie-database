@@ -33,7 +33,7 @@ export const Person = () => {
     return (
         <div className={styles.person}>
             {loading ? <Loader cssOverride={{ marginTop: '300px', marginRight: '100px' }} /> : (
-                <article className={styles.article1}>
+                <article className={styles['profile-section']}>
                     {data?.profile_path ?
                     <img src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${data.profile_path}`} alt={data.name} /> :
                     <div className={styles['no-image']}>
@@ -116,12 +116,12 @@ export const Person = () => {
                         ))}
                     </div> :
                     <p className={styles['also-known-as']}>-</p>}
-                    <button>
+                    <a href="https://www.themoviedb.org/login">
                         <div>
-                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-217-lock-e9f123776b034a0be74a4f3061cd0b9704e854cb8c29307352f20fec2bac4f46.svg" alt="lock" />
+                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-217-lock-white-81d0c4a81e3d038565c80391d6a28a49e98bfe9f1fa26e6473feb3b92de5b4d1.svg" alt="lock" />
                             LOGIN TO EDIT
                         </div>
-                    </button>
+                    </a>
                     <div className={styles.keyboard}>
                         <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-357-keyboard-4de4fe2896d6ba568aeb8c07d250a99374f086554ffd4b1f7645d69325b979ab.svg" alt="keyboard" />
                         <p>Keyboard Shortcuts</p>
@@ -132,7 +132,7 @@ export const Person = () => {
                     </div>
                 </article>
             )}
-            <article className={styles.article2}>
+            <article className={styles['details-section']}>
                 {loading ? <LoaderSmall size={25} /> : <h2>{data?.name}</h2>}
                 <h3>Biography</h3>
                 {loading ? <LoaderSmall size={30} /> : <p>{data?.biography ? data.biography : `We don't have a biography for ${data?.name}.`}</p>}
