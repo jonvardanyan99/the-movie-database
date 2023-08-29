@@ -13,28 +13,28 @@ export const Stats = () => {
                 <img src="https://www.gravatar.com/avatar/32979712631282eac5b6fcc5b55152a6.jpg?s=90" alt="dbowman" />
                 <div>
                     <span>394</span>
-                    <a href="">dbowman</a>
+                    <p>dbowman</p>
                 </div>
             </div>
             <div className={styles.contributors}>
                 <img src="https://www.themoviedb.org/t/p/w45_and_h45_face/3nyT3aw7YK2fmP0egcxUY8sJVqQ.jpg" alt="Gus" />
                 <div>
                     <span>218</span>
-                    <a href="">Gus</a>
+                    <p>Gus</p>
                 </div>
             </div>
             <div className={styles.contributors}>
                 <div>T</div>
                 <div>
                     <span>126</span>
-                    <a href="">TMDB-bot</a>
+                    <p>TMDB-bot</p>
                 </div>
             </div>
             <div className={styles.contributors}>
                 <img src="https://www.themoviedb.org/t/p/w45_and_h45_face/yYG7Rhn9HfFpssIMeNiDynvxC14.jpg" alt="raze464" />
                 <div>
                     <span>125</span>
-                    <a href="">raze464</a>
+                    <p>raze464</p>
                 </div>
             </div>
             <p>View Edit History</p>
