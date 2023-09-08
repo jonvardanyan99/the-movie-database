@@ -19,6 +19,7 @@ import { TopRatedTVShows } from './pages/TopRatedTVShows';
 import { PopularPeople } from './pages/PopularPeople';
 import { Person } from './pages/Person';
 import { Search } from './pages/Search';
+import { SearchDataDisplay } from './pages/Search/components/SearchDataDisplay';
 
 import './App.scss';
 
@@ -42,7 +43,9 @@ function App() {
                         <Route path="/tvs/top-rated" element={<TopRatedTVShows />} />
                         <Route path="/people" element={<PopularPeople />} />
                         <Route path="/person/:id" element={<Person />} />
-                        <Route path="/search/:category/:name" element={<Search />} />
+                        <Route path="/search" element={<Search />}>
+                            <Route path=":category/:name" element={<SearchDataDisplay />} />
+                        </Route>
                     </Routes>
                 </Page>
                 <Footer />
