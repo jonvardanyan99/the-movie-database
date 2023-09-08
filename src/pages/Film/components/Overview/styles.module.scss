@@ -32,7 +32,6 @@
             border-radius: 8px;
             overflow: hidden;
             margin-right: 20px;
-            cursor: pointer;
 
             > div:nth-of-type(1) {
                 justify-content: center;
@@ -44,6 +43,7 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 position: relative;
+                cursor: pointer;
 
                 &:after {
                     position: absolute;
@@ -237,18 +237,62 @@
                     }
                 }
     
-                > .action {
-                    justify-content: center;
-                    width: 46px;
-                    height: 46px;
-                    border-radius: 50%;
-                    background-color: rgb(3, 37, 65);
-                    cursor: pointer;
-    
-                    > img {
-                        object-fit: cover;
-                        width: 16px;
-                        height: 16px;
+                > .actions-container {
+                    > div {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 46px;
+                        height: 46px;
+                        border-radius: 50%;
+                        background-color: rgb(3, 37, 65);
+                        cursor: pointer;
+                        position: relative;
+                        margin-right: 15px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+
+                        &:hover {
+                            > span {
+                                visibility: visible;
+                            }
+                        }
+        
+                        > img {
+                            object-fit: cover;
+                            width: 16px;
+                            height: 16px;
+                        }
+
+                        > span {
+                            visibility: hidden;
+                            transition: visibility 50ms ease-in-out;
+                            width: 190px;
+                            background-color: rgba(3, 37, 65, 1);
+                            color: #fff;
+                            text-align: center;
+                            border-radius: 4px;
+                            padding: 5px 0;
+                            position: absolute;
+                            top: 125%;
+                            left: -30%;
+                            margin-left: -60px;
+                            cursor: auto;
+                            z-index: 5;
+            
+                            &:after {
+                                content: "";
+                                position: absolute;
+                                bottom: 100%;
+                                left: 50%;
+                                margin-left: -5px;
+                                border-width: 7px;
+                                border-style: solid;
+                                border-color: transparent transparent rgba(3, 37, 65, 1) transparent;
+                            }
+                        }
                     }
                 }
             }
@@ -331,6 +375,25 @@
 
 @media only screen and (max-width: 500px) {
     .overview {
-        padding: 30px 20px;
+        > div {
+            > .film-info {
+                > div:nth-of-type(2) {
+                    > .actions-container {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 10px;
+
+                        > div {
+                            margin-right: 0;
+
+                            > span {
+                                width: 150px;
+                                left: 10%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
