@@ -35,7 +35,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                             {item.character && (
                                                                 <>
                                                                     {' as '}
-                                                                    <span>{item.character}</span>
+                                                                    <span className={styles['main-info']}>{item.character}</span>
                                                                 </>
                                                             )}
                                                         </span>
@@ -62,7 +62,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                             {item.character && (
                                                                 <>
                                                                     {' as '}
-                                                                    <span>{item.character}</span>
+                                                                    <span className={styles['main-info']}>{item.character}</span>
                                                                 </>
                                                             )}
                                                         </span>
@@ -76,7 +76,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                             {item.secondCharacter && (
                                                                 <>
                                                                     {' as '}
-                                                                    <span>{item.secondCharacter}</span>
+                                                                    <span className={styles['main-info']}>{item.secondCharacter}</span>
                                                                 </>
                                                             )}
                                                         </span>
@@ -107,7 +107,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                         {item.job && (
                                                             <>
                                                                 {' ... '}
-                                                                <span>{item.job}</span>
+                                                                <span className={styles['main-info']}>{item.job}</span>
                                                             </>
                                                         )}
                                                     </span>
@@ -134,7 +134,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                         {item.job && (
                                                             <>
                                                                 {' ... '}
-                                                                <span>{item.job}</span>
+                                                                <span className={styles['main-info']}>{item.job}</span>
                                                             </>
                                                         )}
                                                     </span>
@@ -148,7 +148,7 @@ export const DataDisplay = ({ loading, creditsLoading, data, name }) => {
                                                         {item.secondJob && (
                                                             <>
                                                                 {' ... '}
-                                                                <span>{item.secondJob}</span>
+                                                                <span className={styles['main-info']}>{item.secondJob}</span>
                                                             </>
                                                         )}
                                                     </span>

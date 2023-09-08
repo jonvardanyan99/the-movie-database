@@ -43,17 +43,7 @@
                         color: rgba(0,0,0,0.5);
                         font-weight: 400;
 
-                        > .episode-count {
-                            color: rgba(0,0,0,0.5);
-                            cursor: pointer;
-                            transition: color 5ms ease-in-out;
-
-                            &:hover {
-                                color: rgb(1, 180, 228);
-                            }
-                        }
-
-                        > span {
+                        > .main-info {
                             color: rgba(0,0,0,0.8);
                         }
                     }
