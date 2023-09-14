@@ -1,17 +1,48 @@
 import { useParams, Link } from 'react-router-dom';
-import format from 'date-fns/format';
+import { useState } from 'react';
 
 import { useQuery } from '../../hooks/useQuery';
-import { Loader } from '../../components/Loader';
 import { LoaderSmall } from '../../components/Loader/LoaderSmall';
+import { Pagination } from '../../components/Pagination';
 
+import { SearchDataDisplay } from './components/SearchDataDisplay';
 import styles from './styles.module.scss';
 
 export const Search = () => {
     const params = useParams();
-    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${params.name}&page=1&include_adult=false` });
-    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${params.name}&page=1&include_adult=false` });
-    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${params.name}&page=1&include_adult=false` });
+    const [movieCurrPage, setMovieCurrPage] = useState(1);
+    const [tvCurrPage, setTvCurrPage] = useState(1);
+    const [personCurrPage, setPersonCurrPage] = useState(1);
+
+    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${params.name}&page=${movieCurrPage}&include_adult=false` });
+    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${params.name}&page=${tvCurrPage}&include_adult=false` });
+    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${params.name}&page=${personCurrPage}&include_adult=false` });
+
+    let loading;
+    let data;
+    let currPage;
+    let onPageChange;
+    let totalPages;
+
+    if (params.category === 'movie') {
+        loading = movieLoading;
+        data = movie;
+        currPage = movieCurrPage;
+        onPageChange = setMovieCurrPage;
+        totalPages = movie?.total_pages;
+    } else if (params.category === 'tv') {
+        loading = tvLoading;
+        data = tv;
+        currPage = tvCurrPage;
+        onPageChange = setTvCurrPage;
+        totalPages = tv?.total_pages;
+    } else if (params.category === 'person') {
+        loading = personLoading;
+        data = person;
+        currPage = personCurrPage;
+        onPageChange = setPersonCurrPage;
+        totalPages = person?.total_pages;
+    };
 
     return (
         <div className={styles.search}>
@@ -19,21 +50,27 @@ export const Search = () => {
                 <div>
                     <div>Search Results</div>
                     <ul>
-                        <li>
-                            <span>Movies</span>
-                            {movieLoading ? <LoaderSmall /> :
-                            <span className={styles['total-results']}>{movie?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
-                        </li>
-                        <li>
-                            <span>TV Shows</span>
-                            {tvLoading ? <LoaderSmall /> :
-                            <span className={styles['total-results']}>{tv?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
-                        </li>
-                        <li>
-                            <span>People</span>
-                            {personLoading ? <LoaderSmall /> :
-                            <span className={styles['total-results']}>{person?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
-                        </li>
+                        <Link to={`movie/${params.name}`}>
+                            <li>
+                                <span>Movies</span>
+                                {movieLoading ? <LoaderSmall /> :
+                                <span className={styles['total-results']}>{movie?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
+                            </li>
+                        </Link>
+                        <Link to={`tv/${params.name}`}>
+                            <li>
+                                <span>TV Shows</span>
+                                {tvLoading ? <LoaderSmall /> :
+                                <span className={styles['total-results']}>{tv?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
+                            </li>
+                        </Link>
+                        <Link to={`person/${params.name}`}>
+                            <li>
+                                <span>People</span>
+                                {personLoading ? <LoaderSmall /> :
+                                <span className={styles['total-results']}>{person?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
+                            </li>
+                        </Link>
                     </ul>
                 </div>       
                 <p>
@@ -41,30 +78,17 @@ export const Search = () => {
                     Tip: You can use the 'y:' filter to narrow your results by year. Example: 'star wars y:1977'.
                 </p>
             </section>
-            <section>
-                {movieLoading ? <Loader cssOverride={{ marginTop: '20px' }} /> : (
-                    movie?.results.length > 0 ? (
-                        movie.results.map(item => (
-                            <div key={item.id}>
-                                <Link to={`/movie/${item.id}`}>
-                                    {item.poster_path ?
-                                    <img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}`} alt={item.title} /> :
-                                    <div className={styles['no-image']}>
-                                        <img src='https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg' alt={item.title} />
-                                    </div>}
-                                </Link>
-                                <div>
-                                    <Link to={`/movie/${item.id}`}>
-                                        <h2>{item.title}</h2>
-                                    </Link>
-                                    {item.release_date && <p>{format(new Date(item.release_date), 'LLLL d, y')}</p>}
-                                    {item.overview && <p className={styles.overview}>{item.overview.length > 225 ? `${item.overview.slice(0, 225)}...` : item.overview}</p>}
-                                </div>
-                            </div>
-                        ))
-                    ) : <p>There are no movies that matched your query.</p>
-                )}
-            </section>
+            <div>
+                <SearchDataDisplay
+                    loading={loading}
+                    data={data}
+                />
+                <Pagination
+                    currPage={currPage}
+                    onPageChange={onPageChange}
+                    totalPages={totalPages || 0}
+                />
+            </div>
         </div>
     );
 };
