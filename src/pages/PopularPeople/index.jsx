@@ -3,40 +3,22 @@ import { Link } from 'react-router-dom';
 
 import { useQuery } from '../../hooks/useQuery';
 import { Loader } from '../../components/Loader';
+import { Pagination } from '../../components/Pagination';
 
+// import { PeopleDataDisplay } from './components/PeopleDataDisplay';
 import styles from './styles.module.scss';
 
 export const PopularPeople = () => {
     const [currPage, setCurrPage] = useState(1);
     const {loading, data} = useQuery({ url: '/person/popular', params: `&language=en-US&page=${currPage}` });
 
-    let arr = [];
-
-    for (let i = 1; i <= data?.total_pages; i++) {
-        arr.push(i);
-    };
-
-    let endNumbers = [arr.length - 1, arr.length];
-    let length = arr.length;
-
-    if (currPage <= 4) {
-        arr = arr.slice(0, 7).concat(['...', ...endNumbers]);
-    } else if (currPage >= 5 && currPage <= 7) {
-        arr = arr.slice(0, currPage + 3).concat(['...', ...endNumbers]);
-    } else if (currPage >= 8 && currPage <= length - 7) {
-        arr = arr.slice(0, 2).concat('...').concat(arr.slice(currPage - 4, currPage + 3)).concat(['...', ...endNumbers]);
-    } else if (currPage >= length - 6 && currPage <= length - 4) {
-        arr = arr.slice(0, 2).concat('...').concat(arr.slice(currPage - 4));
-    } else if (currPage >= length - 3) {
-        arr = arr.slice(0, 2).concat('...').concat(arr.slice(length - 7));
-    };
-
     return (
         <div className={styles['popular-people']}>
             <article>
                 <h2>Popular People</h2>
+                {/* <PeopleDataDisplay loading={loading} data={data} /> */}
                 <section style={{ justifyContent: loading ? 'center': 'unset' }}>
-                    {loading ? <Loader cssOverride={{ marginTop: '40px' }} /> : (
+                    {loading ? <Loader cssOverride={{ marginTop: '35px' }} /> : (
                         data?.results.map(result => (
                             <div key={result.id}>
                                 <Link to={`/person/${result.id}`}>
@@ -68,25 +50,12 @@ export const PopularPeople = () => {
                         ))
                     )}
                 </section>
-                {loading ? null : (
-                    <ul>
-                        {currPage > 1 && <button onClick={() => setCurrPage(currPage - 1)}>← Previous</button>}
-                        {arr.map((item, index) => (
-                            <li
-                                key={index}
-                                onClick={() => {
-                                    if (typeof(item) === 'number') {
-                                        setCurrPage(item);
-                                    };
-                                }}
-                                className={item === currPage ? styles['curr-page'] : item === '...' ? styles.ellipsis : undefined}
-                            >
-                                {item}
-                            </li>
-                        ))}
-                        {currPage < length && <button onClick={() => setCurrPage(currPage + 1)}>Next →</button>}
-                    </ul>
-                )}
+                {loading ? null :
+                <Pagination
+                    currPage={currPage}
+                    onPageChange={setCurrPage}
+                    totalPages={data?.total_pages || 0}
+                />}
             </article>
         </div>
     );
