@@ -26,6 +26,20 @@
                     text-decoration: none;
                     color: black;
 
+                    &.active {
+                        > li {
+                            background-color: #E8E8E8;
+
+                            > span:first-child {
+                                font-weight: bold;
+                            }
+
+                            > .total-results {
+                                background-color: white;
+                            }
+                        }
+                    }
+
                     > li {
                         padding: 10px 20px;
                         display: flex;

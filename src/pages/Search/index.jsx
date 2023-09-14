@@ -50,21 +50,21 @@ export const Search = () => {
                 <div>
                     <div>Search Results</div>
                     <ul>
-                        <Link to={`movie/${params.name}`}>
+                        <Link to={`movie/${params.name}`} className={params.category === 'movie' ? styles.active : ''}>
                             <li>
                                 <span>Movies</span>
                                 {movieLoading ? <LoaderSmall /> :
                                 <span className={styles['total-results']}>{movie?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
                             </li>
                         </Link>
-                        <Link to={`tv/${params.name}`}>
+                        <Link to={`tv/${params.name}`} className={params.category === 'tv' ? styles.active : ''}>
                             <li>
                                 <span>TV Shows</span>
                                 {tvLoading ? <LoaderSmall /> :
                                 <span className={styles['total-results']}>{tv?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
                             </li>
                         </Link>
-                        <Link to={`person/${params.name}`}>
+                        <Link to={`person/${params.name}`} className={params.category === 'person' ? styles.active : ''}>
                             <li>
                                 <span>People</span>
                                 {personLoading ? <LoaderSmall /> :
