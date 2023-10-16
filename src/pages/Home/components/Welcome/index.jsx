@@ -1,13 +1,29 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
 export const Welcome = () => {
     const [inputValue, setInputValue] = useState('');
+    const navigate = useNavigate();
 
     const handleInputChange = event => {
         setInputValue(event.target.value);
+    };
+
+    const navigateToSearch = () => {
+        if (inputValue.trim().length) {
+            navigate({
+                pathname: '/search/movie',
+                search: `?query=${inputValue}&page=1`,
+            });
+        };
+    };
+
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            navigateToSearch();
+        };
     };
 
     return (
@@ -19,9 +35,10 @@ export const Welcome = () => {
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
                     placeholder="Search for a movie, tv show, person......"
                 />
-                <Link to={`/search/movie/${inputValue}`}>Search</Link>
+                <button onClick={navigateToSearch}>Search</button>
             </div>
         </div>
     );

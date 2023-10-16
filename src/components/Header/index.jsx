@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 
 import menuIcon from '../../assets/icons/menu.png';
 import searchIcon from '../../assets/icons/search.png';
@@ -14,11 +14,36 @@ import styles from './styles.module.scss';
 export const Header = () => {
     const [menuModalVisible, setMenuModalVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const inputRef = useRef(null);
+    const searchContainerRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const queryParam = searchParams.get('query');
 
-    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
-    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
-    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
+    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+
+    useEffect(() => {
+        if (queryParam) {
+            setInputValue(queryParam);
+        };
+    }, [queryParam]);
+
+    useEffect(() => {
+        const handleClickOutside = event => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+                setIsFocused(false);
+            };
+        };
+
+        window.addEventListener('click', handleClickOutside);
+
+        return () => window.removeEventListener('click', handleClickOutside);
+    }, []);
 
     const openMenuModal = () => {
         setMenuModalVisible(true);
@@ -36,6 +61,43 @@ export const Header = () => {
         setInputValue(event.target.value);
     };
 
+    const handleKeyDown = event => {
+        if (event.key === 'Enter' && inputValue.trim().length) {
+            navigate({
+                pathname: '/search/movie',
+                search: `?query=${inputValue}&page=1`,
+            });
+            
+            inputRef.current.blur();
+            setIsFocused(false);
+        };
+    };
+
+    const navigateToSearch = (mediaType, query) => {
+        navigate({
+            pathname: `/search/${mediaType}`,
+            search: `?query=${query}&page=1`,
+        });
+
+        setIsFocused(false);
+    };
+
+    let isSearchPathname;
+
+    if (location.pathname === '/search/movie' || location.pathname === '/search/tv' || location.pathname === '/search/person') {
+        isSearchPathname = true;
+    } else {
+        isSearchPathname = false;
+    };
+
+    let noResults = false;
+
+    if (movie && tv && person) {
+        if (!movie.total_results && !tv.total_results && !person.total_results) {
+            noResults = true;
+        };
+    };
+
     return (
         <header className={styles.header}>
             <div>
@@ -45,7 +107,7 @@ export const Header = () => {
                             <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="logo" />
                         </Link>
                     </li>
-                    <li className={styles.link}>
+                    <li className={styles['media-link']}>
                         Movies
                         <ul>
                             <Link to='/movies'>
@@ -62,7 +124,7 @@ export const Header = () => {
                             </Link>
                         </ul>
                     </li>
-                    <li className={styles.link}>
+                    <li className={styles['media-link']}>
                         TV Shows
                         <ul>
                             <Link to='/tvs'>
@@ -79,10 +141,10 @@ export const Header = () => {
                             </Link>
                         </ul>
                     </li>
-                    <li className={styles.link}>
+                    <li className={styles['media-link']}>
                         People
                         <ul>
-                            <Link to='/people'>
+                            <Link to={{ pathname: '/people', search: `?page=1` }}>
                                 <li>Popular People</li>
                             </Link>
                         </ul>
@@ -95,8 +157,17 @@ export const Header = () => {
                     <li className={styles.link}>
                         <a href="https://www.themoviedb.org/signup">Join TMDB</a>
                     </li>
-                    <li className={styles.search} onClick={toggleSearching}>
-                        {searchVisible ? 
+                    <li
+                        className={styles.search}
+                        onClick={e => {
+                            e.stopPropagation();
+
+                            if (!isSearchPathname) {
+                                toggleSearching();
+                            };
+                        }}
+                    >
+                        {(searchVisible && !isSearchPathname) ?
                         <img src={closeIcon} alt="close" /> :
                         <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg" alt="search" />}
                     </li>
@@ -105,44 +176,67 @@ export const Header = () => {
                     </li>
                 </ul>
             </div>
-            {searchVisible &&
-            <section>
-                <div>
-                    <label htmlFor="searchBar">
-                        <img src={searchIcon} alt="search" />
+            {(!searchVisible && !isSearchPathname) ? null : (
+                <section ref={searchContainerRef}>
+                    <div>
+                        <label htmlFor="searchBar">
+                            <img src={searchIcon} alt="search" />
+                            <div>
+                                <input
+                                    id="searchBar"
+                                    type="text"
+                                    ref={inputRef}
+                                    value={inputValue}
+                                    placeholder="Search for a movie, tv show, person..."
+                                    onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
+                                    onFocus={() => setIsFocused(true)}
+                                    autoFocus={isSearchPathname ? false : true}
+                                />
+                                {(movieLoading || tvLoading || personLoading) ? <LoaderSmall speedMultiplier={1} /> : isFocused ?
+                                <img
+                                    src={closeIconGrey}
+                                    alt="clear"
+                                    onClick={() => setInputValue('')}
+                                    onMouseDown={e => e.preventDefault()}
+                                /> : null}
+                            </div>
+                        </label>
+                    </div>
+                    {isFocused && inputValue && movie?.results[0]?.title &&
+                    <button onClick={() => navigateToSearch('movie', movie.results[0].title)}>
                         <div>
-                            <input id="searchBar" type="text" value={inputValue} placeholder="Search for a movie, tv show, person..." onChange={handleChange} autoFocus />
-                            {(movieLoading || tvLoading || personLoading) ? <LoaderSmall speedMultiplier={1} /> : <img src={closeIconGrey} alt="clear" onClick={() => setInputValue('')} />}
+                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-9-film-4ea386ceaf360069e7a0a2c8a3ef4c046883afc49bf2511f77a8282b1ee705dc.svg" alt="film" />
+                            <p>
+                                <span>{movie?.results[0]?.title}</span> in Movies
+                            </p>
                         </div>
-                    </label>
-                </div>
-                {movie?.results[0]?.title &&
-                <Link to={`/search/movie/${movie.results[0].title}`}>
-                    <div className={styles['search-result']} onClick={() => setInputValue(movie?.results[0]?.title)}>
-                        <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-9-film-4ea386ceaf360069e7a0a2c8a3ef4c046883afc49bf2511f77a8282b1ee705dc.svg" alt="film" />
-                        <p>{movie?.results[0]?.title} <span>in Movies</span></p>
-                    </div>
-                </Link>}
-                {tv?.results[0]?.name &&
-                <Link to={`/search/tv/${tv.results[0].name}`}>
-                    <div className={styles['search-result']} onClick={() => setInputValue(tv?.results[0]?.name)}>
-                        <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-87-tv-0ed68826577a0881c28305786e1524bb9c0ab426bb8b0dd637e80f80f338be08.svg" alt="tv" />
-                        <p>{tv?.results[0]?.name} <span>in TV Shows</span></p>
-                    </div>
-                </Link>}
-                {person?.results[0]?.name &&
-                <Link to={`/search/person/${person.results[0].name}`}>
-                    <div className={styles['search-result']} onClick={() => setInputValue(person?.results[0]?.name)}>
-                        <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg" alt="user" />
-                        <p>{person?.results[0]?.name} <span>in People</span></p>
-                    </div>
-                </Link>}
-                {!movie?.results[0]?.title && !tv?.results[0]?.name && !person?.results[0]?.name && inputValue && (
-                    <div className={styles.error}>
-                        NO RESULTS
-                    </div>
-                )}
-            </section>}
+                    </button>}
+                    {isFocused && inputValue && tv?.results[0]?.name &&
+                    <button onClick={() => navigateToSearch('tv', tv.results[0].name)}>
+                        <div>
+                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-87-tv-0ed68826577a0881c28305786e1524bb9c0ab426bb8b0dd637e80f80f338be08.svg" alt="tv" />
+                            <p>
+                                <span>{tv?.results[0]?.name}</span> in TV Shows
+                            </p>
+                        </div>
+                    </button>}
+                    {isFocused && inputValue && person?.results[0]?.name &&
+                    <button onClick={() => navigateToSearch('person', person.results[0].name)}>
+                        <div>
+                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg" alt="user" />
+                            <p>
+                                <span>{person?.results[0]?.name}</span> in People
+                            </p>
+                        </div>
+                    </button>}
+                    {isFocused && inputValue && noResults && (
+                        <div className={styles.error}>
+                            NO RESULTS
+                        </div>
+                    )}
+                </section>
+            )}
             <MenuModal visible={menuModalVisible} onClose={closeMenuModal} />
         </header>
     );

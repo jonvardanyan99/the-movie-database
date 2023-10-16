@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { Modal } from '../../../Modal';
 import closeIcon from '../../../../assets/icons/close.png';
@@ -13,11 +13,28 @@ import styles from './styles.module.scss';
 
 export const MenuModal = ({ visible, onClose }) => {
     const [searchVisible, setSearchVisible] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const inputRef = useRef(null);
+    const searchContainerRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
-    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
-    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false` });
+    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${inputValue}&page=1&include_adult=false`, skip: !inputValue });
+
+    useEffect(() => {
+        const handleClickOutside = event => {
+            if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+                setIsFocused(false);
+            };
+        };
+
+        window.addEventListener('click', handleClickOutside);
+
+        return () => window.removeEventListener('click', handleClickOutside);
+    }, []);
 
     const toggleSearching = () => {
         setSearchVisible(!searchVisible);
@@ -27,51 +44,124 @@ export const MenuModal = ({ visible, onClose }) => {
         setInputValue(event.target.value);
     };
 
+    const handleKeyDown = event => {
+        if (event.key === 'Enter' && inputValue.trim().length) {
+            navigate({
+                pathname: '/search/movie',
+                search: `?query=${inputValue}&page=1`,
+            });
+            
+            inputRef.current.blur();
+            onClose();
+        };
+    };
+
+    const navigateToSearch = (mediaType, query) => {
+        navigate({
+            pathname: `/search/${mediaType}`,
+            search: `?query=${query}&page=1`,
+        });
+
+        setIsFocused(false);
+        onClose();
+    };
+
+    let isSearchPathname;
+
+    if (location.pathname === '/search/movie' || location.pathname === '/search/tv' || location.pathname === '/search/person') {
+        isSearchPathname = true;
+    } else {
+        isSearchPathname = false;
+    };
+
+    let noResults = false;
+
+    if (movie && tv && person) {
+        if (!movie.total_results && !tv.total_results && !person.total_results) {
+            noResults = true;
+        };
+    };
+
     return (
         <Modal className={styles.modal} visible={visible}>
             <div className={styles.menu}>
                 <img src={closeIcon} onClick={onClose} alt="close" />
                 <ul>
                     <li className={styles.logo}>
-                        <Link to='/'>
+                        <Link to='/' onClick={onClose}>
                             <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="logo" />
                         </Link>
                     </li>
-                    <li className={styles.search} onClick={toggleSearching}>
-                        {searchVisible ?
+                    <li
+                        className={styles.search}
+                        onClick={e => {
+                            e.stopPropagation();
+
+                            if (!isSearchPathname) {
+                                toggleSearching();
+                            };
+                        }}
+                    >
+                        {(searchVisible && !isSearchPathname) ?
                         <img src={closeIcon} alt="close" /> :
                         <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-28-search-blue-177462d06db81ff2a02aa022c1c0be5ba4200d7bd3f51091ed9298980e3a26a1.svg" alt="search" />}
                     </li>
                 </ul>
-                {searchVisible ? (
-                    <section>
+                {(searchVisible && !isSearchPathname) ? (
+                    <section ref={searchContainerRef}>
                         <div>
                             <label htmlFor="searchBar">
                                 <img src={searchIcon} alt="search" />
                                 <div>
-                                    <input id="searchBar" type="text" value={inputValue} placeholder="Search for a movie, tv show, person..." onChange={handleChange} />
-                                    {(movieLoading || tvLoading || personLoading) ? <LoaderSmall speedMultiplier={1} /> : <img src={closeIconGrey} alt="closeIconGrey" onClick={() => setInputValue('')} />}
+                                    <input
+                                        id="searchBar"
+                                        type="text"
+                                        value={inputValue}
+                                        placeholder="Search for a movie, tv show, person..."
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyDown}
+                                        ref={inputRef}
+                                        onFocus={() => setIsFocused(true)}
+                                        autoFocus
+                                    />
+                                    {(movieLoading || tvLoading || personLoading) ? <LoaderSmall speedMultiplier={1} /> : isFocused ?
+                                    <img
+                                        src={closeIconGrey}
+                                        alt="closeIconGrey"
+                                        onClick={() => setInputValue('')}
+                                        onMouseDown={(e) => e.preventDefault()}
+                                    /> : null}
                                 </div>
                             </label>
                         </div>
-                        {movie?.results[0]?.title &&
-                        <Link to={`/search/movie/${movie?.results[0]?.title}`} onClick={() => setInputValue(movie?.results[0]?.title)}>
-                            <div className={styles.searched}>
+                        {isFocused && inputValue && movie?.results[0]?.title &&
+                        <button onClick={() => navigateToSearch('movie', movie.results[0].title)}>
+                            <div>
                                 <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-9-film-4ea386ceaf360069e7a0a2c8a3ef4c046883afc49bf2511f77a8282b1ee705dc.svg" alt="film" />
-                                <p>{movie?.results[0]?.title} <span>in Movies</span></p>
+                                <p>
+                                    <span>{movie?.results[0]?.title}</span> in Movies
+                                </p>
                             </div>
-                        </Link>}
-                        {tv?.results[0]?.name &&
-                        <div className={styles.searched}>
-                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-87-tv-0ed68826577a0881c28305786e1524bb9c0ab426bb8b0dd637e80f80f338be08.svg" alt="tv" />
-                            <p>{tv?.results[0]?.name} <span>in TV Shows</span></p>
-                        </div>}
-                        {person?.results[0]?.name &&
-                        <div className={styles.searched}>
-                            <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg" alt="user" />
-                            <p>{person?.results[0]?.name} <span>in People</span></p>
-                        </div>}
-                        {!movie?.results[0]?.title && !tv?.results[0]?.name && !person?.results[0]?.name && inputValue && (
+                        </button>}
+                        {isFocused && inputValue && tv?.results[0]?.name &&
+                        <button onClick={() => navigateToSearch('tv', tv.results[0].name)}>
+                            <div>
+                                <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-87-tv-0ed68826577a0881c28305786e1524bb9c0ab426bb8b0dd637e80f80f338be08.svg" alt="tv" />
+                                <p>
+                                    <span>{tv?.results[0]?.name}</span> in TV Shows
+                                </p>
+                            </div>
+                        </button>}
+                        {isFocused && inputValue && person?.results[0]?.name &&
+                        <button onClick={() => navigateToSearch('person', person.results[0].name)}>
+                            <div>
+                                <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg" alt="user" />
+                                <p>
+                                    <span>{person?.results[0]?.name}</span> in People
+                                </p>
+                            </div>
+                        </button>}
+                        {isFocused && inputValue && noResults && (
                             <div className={styles.error}>
                                 NO RESULTS
                             </div>
@@ -79,57 +169,56 @@ export const MenuModal = ({ visible, onClose }) => {
                     </section>
                 ) : (
                     <ul>
-                        <li className={styles.link}>
+                        <li className={styles['media-link']}>
                             Movies
                             <ul>
-                                <Link to='/movies'>
+                                <Link to='/movies' onClick={onClose}>
                                     <li>Popular</li>
                                 </Link>
-                                <Link to='/movies/now-playing'>
+                                <Link to='/movies/now-playing' onClick={onClose}>
                                     <li>Now Playing</li>
                                 </Link>
-                                <Link to='/movies/upcoming'>
+                                <Link to='/movies/upcoming' onClick={onClose}>
                                     <li>Upcoming</li>
                                 </Link>
-                                <Link to='/movies/top-rated'>
+                                <Link to='/movies/top-rated' onClick={onClose}>
                                     <li>Top Rated</li>
                                 </Link>
                             </ul>
                         </li>
-                        <li className={styles.link}>
+                        <li className={styles['media-link']}>
                             TV Shows
                             <ul>
-                                <Link to='/tvs'>
+                                <Link to='/tvs' onClick={onClose}>
                                     <li>Popular</li>
                                 </Link>
-                                <Link to='/tvs/airing-today'>
+                                <Link to='/tvs/airing-today' onClick={onClose}>
                                     <li>Airing Today</li>
                                 </Link>
-                                <Link to='/tvs/on-the-air'>
+                                <Link to='/tvs/on-the-air' onClick={onClose}>
                                     <li>On TV</li>
                                 </Link>
-                                <Link to='/tvs/top-rated'>
+                                <Link to='/tvs/top-rated' onClick={onClose}>
                                     <li>Top Rated</li>
                                 </Link>
                             </ul>
                         </li>
-                        <li className={styles.link}>
+                        <li className={styles['media-link']}>
                             People
                             <ul>
-                                <Link to='/people'>
+                                <Link to={{ pathname: '/people', search: `?page=1` }} onClick={onClose}>
                                     <li>Popular People</li>
                                 </Link>
                             </ul>
                         </li>
                         <li className={styles.link}>
-                            <a href="">Login</a>
+                            <a href="https://www.themoviedb.org/login">Login</a>
                         </li>
                         <li className={styles.link}>
-                            <a href="">Join TMDB</a>
+                            <a href="https://www.themoviedb.org/signup">Join TMDB</a>
                         </li>
                     </ul>
-                )
-                }
+                )}
             </div>
         </Modal>
     );

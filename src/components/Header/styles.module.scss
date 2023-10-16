@@ -32,10 +32,32 @@
 
             > li {
                 list-style: none;
-                padding: 8px;
                 cursor: pointer;
-                position: relative;
                 color: white;
+                font-weight: 600;
+            }
+    
+            > .logo {
+                font-weight: unset;
+
+                > a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 8px;
+                    padding-left: 0;
+
+                    > img {
+                        width: 154px;
+                        height: 20px;
+                        object-fit: contain;
+                    }
+                }
+            }
+
+            > .media-link {
+                padding: 8px;
+                position: relative;
 
                 &:hover {
                     > ul {
@@ -75,29 +97,12 @@
                     }
                 }
             }
-    
-            > .link {
-                font-weight: 600;
 
+            > .link {
                 > a {
                     text-decoration: none;
                     color: white;
-                }
-            }
-    
-            > .logo {
-                padding: 0;
-
-                > a {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    > img {
-                        width: 154px;
-                        height: 20px;
-                        object-fit: contain;
-                    }
+                    padding: 8px;
                 }
             }
 
@@ -139,21 +144,19 @@
         transition-timing-function: ease-in;
 
         > div {
-            padding-left: 342px;
             border-bottom: 1px solid rgba(227, 227, 227, 1);
         }
 
-        > a {
-            > div {
-                padding-left: 342px;
-                border-bottom: 1px solid rgba(227, 227, 227, 1);
-            }
-        }
-
         > div:nth-of-type(1) {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
             > label {
                 display: flex;
                 align-items: center;
+                width: 1300px;
+                padding: 0 40px;
 
                 > img {
                     width: 16px;
@@ -164,7 +167,7 @@
                 > div {
                     display: flex;
                     align-items: center;
-                    width: 75%;
+                    width: 100%;
 
                     > input {
                         width: 100%;
@@ -187,6 +190,7 @@
                         object-fit: cover;
                         cursor: pointer;
                         padding: 5px;
+                        margin-right: -6px;
                         filter: brightness(85%);
                         transition: filter 0.05s ease-in;
 
@@ -198,23 +202,29 @@
             }
         }
 
-        > a {
-            color: black;
-            text-decoration: none;
+        > button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border: none;
+            background-color: white;
+            outline: none;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(227, 227, 227, 1);
+            transition-property: background-color;
+            transition-duration: 0.05s;
+            transition-timing-function: ease-out;
 
-            > .search-result {
+            &:hover {
+                background-color: #efefef;
+            }
+
+            > div {
+                width: 1300px;
+                padding: 5px 40px;
                 display: flex;
                 align-items: center;
-                padding-top: 5px;
-                padding-bottom: 5px;
-                transition-property: background-color;
-                transition-duration: 0.05s;
-                transition-timing-function: ease-out;
-    
-                &:hover {
-                    background-color: #f8f9fa;
-                }
-    
+
                 > img {
                     width: 16px;
                     height: 16px;
@@ -222,42 +232,13 @@
                 }
     
                 > p {
-                    font-weight: 600;
                     margin-left: 6px;
+                    font-size: 16px;
+                    text-align: left;
     
                     > span {
-                        font-weight: normal;
+                        font-weight: 600;
                     }
-                }
-            }
-        }
-
-        > .search-result {
-            display: flex;
-            align-items: center;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            cursor: pointer;
-            transition-property: background-color;
-            transition-duration: 0.05s;
-            transition-timing-function: ease-out;
-
-            &:hover {
-                background-color: #f8f9fa;
-            }
-
-            > img {
-                width: 16px;
-                height: 16px;
-                object-fit: cover;
-            }
-
-            > p {
-                font-weight: 600;
-                margin-left: 6px;
-
-                > span {
-                    font-weight: normal;
                 }
             }
         }
@@ -272,6 +253,18 @@
     }
 }
 
+@media only screen and (max-width: 1300px) {
+    .header {
+        > section {
+            > div:nth-of-type(1) {
+                > label {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 970px) {
     .header {
         > div {
@@ -282,7 +275,7 @@
                     justify-content: flex-end;
                 }
 
-                > .link, > .search {
+                > .media-link, > .link, > .search {
                     display: none;
                 }
 
@@ -298,6 +291,20 @@
     .header {
         > div {
             padding: 0 20px;
+        }
+
+        > section {
+            > div:nth-of-type(1) {
+                > label {
+                    padding: 0 20px;
+                }
+            }
+
+            > button {
+                > div {
+                    padding: 5px 20px;
+                }
+            }
         }
     }
 }

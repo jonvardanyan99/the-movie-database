@@ -1,5 +1,5 @@
-import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import { useQuery } from '../../hooks/useQuery';
 import { LoaderSmall } from '../../components/Loader/LoaderSmall';
@@ -10,39 +10,44 @@ import styles from './styles.module.scss';
 
 export const Search = () => {
     const params = useParams();
-    const [movieCurrPage, setMovieCurrPage] = useState(1);
-    const [tvCurrPage, setTvCurrPage] = useState(1);
-    const [personCurrPage, setPersonCurrPage] = useState(1);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const queryParam = searchParams.get('query');
+    const pageParam = searchParams.get('page');
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${params.name}&page=${movieCurrPage}&include_adult=false` });
-    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${params.name}&page=${tvCurrPage}&include_adult=false` });
-    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${params.name}&page=${personCurrPage}&include_adult=false` });
+    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
+    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
+    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
+
+    useEffect(() => {
+        if (pageParam) {
+            setCurrentPage(+pageParam);
+        };
+    }, [pageParam]);
+    
+    const handlePageParamChange = page => {
+        setSearchParams({ query: queryParam, page }, { replace: true });
+    };
 
     let loading;
     let data;
-    let currPage;
-    let onPageChange;
     let totalPages;
 
     if (params.category === 'movie') {
         loading = movieLoading;
         data = movie;
-        currPage = movieCurrPage;
-        onPageChange = setMovieCurrPage;
         totalPages = movie?.total_pages;
     } else if (params.category === 'tv') {
         loading = tvLoading;
         data = tv;
-        currPage = tvCurrPage;
-        onPageChange = setTvCurrPage;
         totalPages = tv?.total_pages;
     } else if (params.category === 'person') {
         loading = personLoading;
         data = person;
-        currPage = personCurrPage;
-        onPageChange = setPersonCurrPage;
         totalPages = person?.total_pages;
     };
+
+    const search = `?query=${queryParam}&page=1`;
 
     return (
         <div className={styles.search}>
@@ -50,21 +55,21 @@ export const Search = () => {
                 <div>
                     <div>Search Results</div>
                     <ul>
-                        <Link to={`movie/${params.name}`} className={params.category === 'movie' ? styles.active : ''}>
+                        <Link to={{ pathname: '/search/movie', search }} className={params.category === 'movie' ? styles.active : ''}>
                             <li>
                                 <span>Movies</span>
                                 {movieLoading ? <LoaderSmall /> :
                                 <span className={styles['total-results']}>{movie?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
                             </li>
                         </Link>
-                        <Link to={`tv/${params.name}`} className={params.category === 'tv' ? styles.active : ''}>
+                        <Link to={{ pathname: '/search/tv', search }} className={params.category === 'tv' ? styles.active : ''}>
                             <li>
                                 <span>TV Shows</span>
                                 {tvLoading ? <LoaderSmall /> :
                                 <span className={styles['total-results']}>{tv?.total_results.toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: true })}</span>}
                             </li>
                         </Link>
-                        <Link to={`person/${params.name}`} className={params.category === 'person' ? styles.active : ''}>
+                        <Link to={{ pathname: '/search/person', search }} className={params.category === 'person' ? styles.active : ''}>
                             <li>
                                 <span>People</span>
                                 {personLoading ? <LoaderSmall /> :
@@ -72,7 +77,7 @@ export const Search = () => {
                             </li>
                         </Link>
                     </ul>
-                </div>       
+                </div>
                 <p>
                     <img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-636-circle-info-06837a451a09552349b182d84ae84f26308efee8f7e8ddca255bd5dbc4a66ea4.svg" alt="info" />
                     Tip: You can use the 'y:' filter to narrow your results by year. Example: 'star wars y:1977'.
@@ -80,14 +85,15 @@ export const Search = () => {
             </section>
             <div>
                 <SearchDataDisplay
-                    loading={loading}
-                    data={data}
+                    loading={loading || false}
+                    data={data || {}}
                 />
+                {loading ? null :
                 <Pagination
-                    currPage={currPage}
-                    onPageChange={onPageChange}
+                    currentPage={currentPage}
+                    onPageChange={handlePageParamChange}
                     totalPages={totalPages || 0}
-                />
+                />}
             </div>
         </div>
     );
