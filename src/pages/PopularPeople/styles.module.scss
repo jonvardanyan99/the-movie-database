@@ -10,68 +10,7 @@
             font-weight: 700;
         }
 
-        > section {
-            width: 1350px;
-            display: flex;
-            flex-wrap: wrap;
-    
-            > div {
-                width: 235px;
-                margin-top: 30px;
-                margin-right: 35px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                border: 1px solid rgba(227, 227, 227, 1);
-
-                > a {
-                    > img {
-                        width: 100%;
-                        height: 235px;
-                        object-fit: cover;
-                        cursor: pointer;
-                    }
-    
-                    > .no-image {
-                        width: 100%;
-                        height: 235px;
-                        background-color: #DBDBDB;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        cursor: pointer;
-    
-                        > img {
-                            width: 120px;
-                            height: 120px;
-                            object-fit: cover;
-                        }
-                    }
-                }
-
-                > div {
-                    padding: 2px 10px 8px 10px;
-
-                    > a {
-                        text-decoration: none;
-
-                        > h3 {
-                            display: inline;
-                            font-size: 18px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            color: black;
-                        }
-                    }
-    
-                    > p {
-                        font-size: 14.5px;
-                        font-weight: 400;
-                        color: rgba(0,0,0,0.6);
-                    }
-                }
-            }
-        }
-
-        > ul {
+        > div:nth-of-type(2) {
             width: 1315px;
             margin-top: 25px;
         }
@@ -81,11 +20,7 @@
 @media only screen and (max-width: 1380px) {
     .popular-people {
         > article {
-            > section {
-                width: 1080px;
-            }
-
-            > ul {
+            > div:nth-of-type(2) {
                 width: 1045px;
             }
         }
@@ -95,11 +30,7 @@
 @media only screen and (max-width: 1115px) {
     .popular-people {
         > article {
-            > section {
-                width: 810px;
-            }
-
-            > ul {
+            > div:nth-of-type(2) {
                 width: 775px;
             }
         }
@@ -109,11 +40,7 @@
 @media only screen and (max-width: 850px) {
     .popular-people {
         > article {
-            > section {
-                width: 540px;
-            }
-
-            > ul {
+            > div:nth-of-type(2) {
                 width: 505px;
             }
         }
@@ -125,15 +52,7 @@
         > article {
             margin-left: 0;
 
-            > section {
-                width: 235px;
-
-                > div {
-                    margin-right: 0;
-                }
-            }
-
-            > ul {
+            > div:nth-of-type(2) {
                 width: 235px;
                 justify-content: unset;
             }
