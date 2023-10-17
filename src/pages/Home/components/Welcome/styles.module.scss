@@ -31,11 +31,12 @@
             outline: none;
         }
 
-        > a {
+        > button {
             position: absolute;
+            border: none;
+            cursor: pointer;
             top: 0;
             right: -1px;
-            text-decoration: none;
             background: linear-gradient(to right, rgba(30, 213, 169, 1) 0%, rgba(1, 180, 228, 1) 100%);
             border-radius: 30px;
             color: #fff;
