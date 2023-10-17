@@ -16,9 +16,13 @@ export const SearchDataDisplay = ({ loading, data }) => {
             noResultWord = 'movies';
         } else if (params.category === 'tv') {
             noResultWord = 'TV shows';
-        } else {
+        } else if (params.category === 'person') {
             noResultWord = 'people';
         };
+    };
+
+    if (Object.keys(data).length === 0) {
+        noResultWord = 'films';
     };
 
     return (
@@ -64,7 +68,7 @@ export const SearchDataDisplay = ({ loading, data }) => {
                                         </div>}
                                     </Link>
                                     <div>
-                                        <Link to={`/person/${result.id}`}>
+                                        <Link to={`/${params.category}/${result.id}`}>
                                             <h2>{result.name}</h2>
                                         </Link>
                                         <p>
@@ -89,11 +93,6 @@ export const SearchDataDisplay = ({ loading, data }) => {
             )}
         </div>
     );
-};
-
-SearchDataDisplay.defaultProps = {
-    loading: false,
-    data: {},
 };
 
 SearchDataDisplay.propTypes = {
