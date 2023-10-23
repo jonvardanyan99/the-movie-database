@@ -13,6 +13,7 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
     const [departmentTypeVisible, setDepartmentTypeVisible] = useState(false);
     const [mediaType, setMediaType] = useState('All');
     const [departmentType, setDepartmentType] = useState('All');
+    
     const {loading: creditsLoading, data} = useQuery({ url: `/person/${params.id}/combined_credits`, params: '&language=en-US' });
 
     for (let i = 0; i <= data?.cast.length - 2; i++) {
