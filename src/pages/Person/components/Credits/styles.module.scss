@@ -82,6 +82,19 @@
             margin-right: 10px;
         }
     }
+
+    > div {
+        margin-bottom: 30px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        > h3 {
+            font-size: 21px;
+            font-weight: 600;
+        }
+    }
 }
 
 @media only screen and (max-width: 1330px) {

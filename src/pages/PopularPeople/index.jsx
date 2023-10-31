@@ -33,7 +33,7 @@ export const PopularPeople = () => {
                 <Pagination
                     currentPage={currentPage}
                     onPageChange={handlePageParamChange}
-                    totalPages={data?.total_pages || 0}
+                    totalPages={500}
                 />}
             </article>
         </div>
