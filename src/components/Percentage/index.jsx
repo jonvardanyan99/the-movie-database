@@ -27,7 +27,7 @@ export const Percentage = ({ percent, className }) => {
                     textAlign: 'center',
                     paddingLeft: '5px',
                     fontFamily: "'Source Sans Pro', Arial, sans-serif",
-                    fontSize: '16px',
+                    fontSize: '22px',
                     lineHeight: '16px',
                     color: 'white',
                     fontWeight: 'bold',
@@ -39,7 +39,7 @@ export const Percentage = ({ percent, className }) => {
                 circle.path.setAttribute('stroke', state.color);
 
                 var value = Math.round(circle.value());
-                circle.setText(`<span>${value}<sup style="font-size: 8px; margin-left: 1px">%</sup></span>`);
+                circle.setText(`<span>${value}<sup style="font-size: 12px; margin-left: 1px">%</sup></span>`);
             },
         });
 
