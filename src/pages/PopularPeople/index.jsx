@@ -8,19 +8,12 @@ import styles from './styles.module.scss';
 
 export const PopularPeople = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [currentPage, setCurrentPage] = useState(1);
   const pageParam = searchParams.get('page');
 
   const { loading, data } = useQuery({
     url: '/person/popular',
     params: `&language=en-US&page=${pageParam}`,
   });
-
-  // useEffect(() => {
-  //     if (pageParam) {
-  //         setCurrentPage(+pageParam);
-  //     };
-  // }, [pageParam]);
 
   const handlePageParamChange = page => {
     setSearchParams({ page });
