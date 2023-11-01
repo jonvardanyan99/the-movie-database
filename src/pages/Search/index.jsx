@@ -13,20 +13,13 @@ export const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryParam = searchParams.get('query');
     const pageParam = searchParams.get('page');
-    const [currentPage, setCurrentPage] = useState(1);
 
-    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
-    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
-    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${queryParam}&page=${currentPage}&include_adult=false` });
-
-    useEffect(() => {
-        if (pageParam) {
-            setCurrentPage(+pageParam);
-        };
-    }, [pageParam]);
+    const {loading: movieLoading, data: movie} = useQuery({ url: '/search/movie', params: `&language=en-US&query=${queryParam}&page=${pageParam}&include_adult=false` });
+    const {loading: tvLoading, data: tv} = useQuery({ url: '/search/tv', params: `&language=en-US&query=${queryParam}&page=${pageParam}&include_adult=false` });
+    const {loading: personLoading, data: person} = useQuery({ url: '/search/person', params: `&language=en-US&query=${queryParam}&page=${pageParam}&include_adult=false` });
     
     const handlePageParamChange = page => {
-        setSearchParams({ query: queryParam, page }, { replace: true });
+        setSearchParams({ query: queryParam, page });
     };
 
     let loading;
@@ -90,7 +83,7 @@ export const Search = () => {
                 />
                 {loading ? null :
                 <Pagination
-                    currentPage={currentPage}
+                    currentPage={+pageParam}
                     onPageChange={handlePageParamChange}
                     totalPages={totalPages || 0}
                 />}
