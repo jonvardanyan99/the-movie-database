@@ -18,12 +18,13 @@
             margin-right: 50px;
         }
 
-        > ul {
+        > div {
             display: flex;
             flex-wrap: wrap;
             
-            > li {
-                list-style: none;
+            > button {
+                border: none;
+                background: none;
                 font-size: 18px;
                 font-weight: 600;
                 cursor: pointer;

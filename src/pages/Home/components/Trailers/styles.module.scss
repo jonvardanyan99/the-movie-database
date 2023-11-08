@@ -33,7 +33,11 @@
                 margin-right: 0;
             }
 
-            > div {
+            > button {
+                border: none;
+                background: none;
+                width: 100%;
+                height: 168px;
                 position: relative;
                 transition: transform 0.2s ease-in-out;
                 cursor: pointer;
@@ -48,7 +52,7 @@
 
                 > img:first-child {
                     width: 100%;
-                    height: 168px;
+                    height: 100%;
                     border-radius: 8px;
                     object-fit: cover;
                 }

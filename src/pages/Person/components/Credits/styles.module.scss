@@ -2,14 +2,16 @@
     margin-top: 20px;
     position: relative;
 
-    > ul {
+    > .filter-buttons {
         position: absolute;
         top: 0;
         right: 0;
         display: flex;
 
-        > li {
-            list-style: none;
+        button {
+            border: none;
+            background: none;
+            font-size: 16px;
             cursor: pointer;
             transition: color 50ms ease-in-out;
         }
@@ -25,53 +27,69 @@
         }
 
         > .media-type, > .department {
-            padding: 8px 25px 8px 8px;
             position: relative;
 
-            &::after {
-                content: "";
-                position: absolute;
-                right: 8px;
-                top: 50%;
-                transform: translateY(-50%);
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 6px solid black;
-                transition: border-top-color 50ms ease-in-out;
-            }
-
-            &:hover {
-                color: rgba(33, 37, 41, 0.7);
+            > button {
+                padding: 8px 25px 8px 8px;
+                position: relative;
 
                 &::after {
-                    border-top-color: rgba(33, 37, 41, 0.7);
+                    content: "";
+                    position: absolute;
+                    right: 8px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    border-left: 4px solid transparent;
+                    border-right: 4px solid transparent;
+                    border-top: 6px solid black;
+                    transition: border-top-color 50ms ease-in-out;
+                }
+
+                &:hover {
+                    color: rgba(33, 37, 41, 0.7);
+
+                    &::after {
+                        border-top-color: rgba(33, 37, 41, 0.7);
+                    }
+                }
+
+                &.active {
+                    color: rgba(33, 37, 41, 0.7);
+    
+                    &::after {
+                        border-top-color: rgba(33, 37, 41, 0.7);
+                    }
                 }
             }
 
-            > ul {
-                margin-top: 8px;
+            > div {
                 cursor: auto;
                 color: black;
                 position: absolute;
+                top: 100%;
                 left: -2px;
                 width: 173px;
                 padding: 8px 0;
                 background-color: white;
                 border: 1px solid rgba(0,0,0,0.15);
                 border-radius: 4px;
-
-                > li {
+    
+                > button {
+                    border: none;
+                    background: none;
                     cursor: pointer;
-                    list-style: none;
+                    font-size: 16px;
+                    width: 100%;
                     padding: 5px 0 5px 24px;
+                    text-align: left;
                     transition: color 50ms ease-in-out;
                     
                     &:hover {
                         background-color: #F0F0F0;
                     }
-
+    
                     > span {
-                        font-weight: 300;
+                        color: gray;
                         margin-left: 3px;
                     }
                 }
@@ -83,7 +101,7 @@
         }
     }
 
-    > div {
+    > .department-container {
         margin-bottom: 30px;
 
         &:last-child {
@@ -97,28 +115,39 @@
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1390px) {
     .credits {
-        > ul {
+        > .filter-buttons {
             > .media-type, > .department {
-                > ul {
-                    width: 150px;
+                > div {
+                    width: 140px;
+
+                    > button {
+                        padding-left: 20px;
+                    }
                 }
             }
         }
     }
 }
 
-@media only screen and (max-width: 510px) {
+@media only screen and (max-width: 500px) {
     .credits {
-        > ul {
-            > .media-type, > .department {
-                > ul {
-                    width: 135px;
+        margin-top: 60px;
 
-                    > li {
-                        padding-left: 15px;
-                    }
+        > .filter-buttons {
+            top: -40px;
+            left: 0;
+
+            > .clear {
+                order: 2;
+                margin-right: 0;
+                margin-left: 10px;
+            }
+
+            > .media-type {
+                > button {
+                    padding-left: 0;
                 }
             }
         }

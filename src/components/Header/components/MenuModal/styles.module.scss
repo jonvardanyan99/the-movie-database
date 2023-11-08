@@ -7,116 +7,54 @@
     background-color: white;
     width: 300px;
 
-    > img {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
+    > button {
+        border: none;
+        background: none;
         cursor: pointer;
         margin: 20px 0 30px 15px;
         padding: 5px;
         padding-left: 0;
+
+        > img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
     }
 
-    > ul {
+    > div {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 15px;
 
-        &:nth-of-type(2) {
-            flex-direction: column;
-            margin-top: 10px;
-            padding: 0;
-            transition-timing-function: ease-in;
-
-            > li {
-                text-align: center;
-                color: rgb(3, 37, 65);
-            }
-
-            > .media-link {
-                padding: 5px;
-
-                &:hover {
-                    > ul {
-                        display: block;
-                        transition-timing-function: ease-in;
-                    }
-                }
-    
-                > ul {
-                    cursor: auto;
-                    display: none;
-                    background-color: #F0F0F0;
-                    width: 173px;
-                    padding: 8px 0;
-                    border-radius: 4px;
-    
-                    > a {
-                        text-decoration: none;
-                        color: black;
-    
-                        > li {
-                            list-style: none;
-                            padding: 5px 0;
-                            padding-right: 0;
-                            font-weight: 400;
-    
-                            &:hover {
-                                background-color: white;
-                                transition: color 0.05s ease-in;
-                            }
-                        }
-                    }
-                }
-            }
-
-            > .link {
-                font-weight: 600;
-                margin: 5px 0;
-    
-                > a {
-                    padding: 5px;
-                    text-decoration: none;
-                    color: rgba(3, 37, 65, 1);
-                }
+        > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            
+            > img {
+                width: 154px;
+                height: 20px;
+                object-fit: contain;
             }
         }
 
-        > li {
-            list-style: none;
+        > button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            background: none;
+            padding: 5px;
+            padding-right: 0;
             cursor: pointer;
-        }
-
-        > .logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            > a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 5px;
-
-                > img {
-                    width: 154px;
-                    height: 20px;
-                    object-fit: contain;
-                }
-            }
-        }
-
-        > .search {
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
             > img {
                 width: 29px;
                 height: 29px;
                 object-fit: contain;
-                transition-timing-function: ease-in;
             }
         }
     }
@@ -162,18 +100,25 @@
                         }
                     }
 
-                    > img {
-                        width: 26px;
-                        height: 26px;
-                        object-fit: cover;
+                    > button {
+                        border: none;
+                        background: none;
                         cursor: pointer;
                         padding: 5px;
-                        margin-right: -6px;
-                        filter: brightness(85%);
-                        transition: filter 0.05s ease-in;
+                        margin-right: -8px;
 
                         &:hover {
-                            filter: brightness(0%);
+                            > img {
+                                filter: brightness(0%);
+                            }
+                        }
+
+                        > img {
+                            width: 19px;
+                            height: 19px;
+                            object-fit: cover;
+                            filter: brightness(85%);
+                            transition: filter 0.05s ease-in;                            
                         }
                     }
                 }
@@ -227,6 +172,69 @@
             font-size: 19px;
             text-align: center;
             color: rgba(33,37,41,0.5);
+        }
+    }
+
+    > ul {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+        padding: 0;
+
+        > li {
+            text-align: center;
+            color: rgb(3, 37, 65);
+            list-style: none;
+        }
+
+        > .media-link {
+            padding: 5px;
+            cursor: pointer;
+
+            &:hover {
+                > ul {
+                    display: block;
+                }
+            }
+
+            > ul {
+                cursor: auto;
+                display: none;
+                background-color: #F0F0F0;
+                width: 173px;
+                padding: 8px 0;
+                margin-top: 5px;
+                border-radius: 4px;
+
+                > a {
+                    text-decoration: none;
+                    color: black;
+
+                    > li {
+                        list-style: none;
+                        padding: 5px 0;
+                        padding-right: 0;
+                        font-weight: 400;
+
+                        &:hover {
+                            background-color: white;
+                            transition: color 0.05s ease-in;
+                        }
+                    }
+                }
+            }
+        }
+
+        > .link {
+            font-weight: 600;
+            margin: 5px 0;
+
+            > a {
+                padding: 5px;
+                text-decoration: none;
+                color: rgba(3, 37, 65, 1);
+            }
         }
     }
 }

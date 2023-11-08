@@ -9,18 +9,20 @@
         margin-right: 20px;
     }
 
-    > ul {
+    > div {
         display: flex;
         align-items: center;
         border: 1px solid rgba(3, 37, 65, 1);
         border-radius: 30px;
         flex-wrap: wrap;
 
-        > li {
-            list-style: none;
+        > button {
+            border: none;
+            background: none;
             padding: 4px 20px;
             border-radius: 30px;
             color: rgba(3, 37, 65, 1);
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -42,10 +44,10 @@
             color: white;
         }
 
-        > ul {
+        > div {
             border-color: #1ed5a9;
 
-            > li {
+            > button {
                 color: white;
 
                 &.active-category {

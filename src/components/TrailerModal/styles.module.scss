@@ -23,17 +23,25 @@
             font-weight: 400;
         }
 
-        > img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
+        > button {
+            border: none;
+            background: none;
+            border-radius: 6px;
             cursor: pointer;
             padding: 5px;
-            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transition-duration: 0.3s;
 
             &:hover {
                 background-color: white;
+            }
+
+            > img {
+                width: 28px;
+                height: 28px;
+                object-fit: contain;
             }
         }
     }

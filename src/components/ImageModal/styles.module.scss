@@ -23,13 +23,18 @@
         justify-content: space-between;
         align-items: flex-end;
 
-        > img {
-            width: 33px;
-            height: 33px;
-            object-fit: contain;
+        > button {
+            border: none;
+            background: none;
             cursor: pointer;
             padding: 7px;
             margin: 10px 10px 0 0;
+
+            > img {
+                width: 33px;
+                height: 33px;
+                object-fit: contain;
+            }
         }
 
         > div {
