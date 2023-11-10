@@ -1,47 +1,47 @@
 .data-display {
-    padding: 16px;
-    border-bottom: 1px solid #dedede;
+  padding: 16px;
+  border-bottom: 1px solid #dedede;
 
-    > div {
-        display: flex;
-        margin-bottom: 16px;
+  > div {
+    display: flex;
+    margin-bottom: 16px;
 
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        > .planned {
-            margin-left: 10px;
-        }
-
-        > h4 {
-            margin-left: 20px;
-            font-weight: 600;
-
-            > a {
-                color: black;
-                text-decoration: none;
-                transition: color 0.01s ease-in-out;
-
-                &:hover {
-                    color: rgb(1, 180, 228);
-                }
-            }
-
-            > span {
-                display: block;
-                margin-left: 14px;
-                color: rgba(0,0,0,0.5);
-                font-weight: 400;
-
-                > .main-info {
-                    color: rgba(0,0,0,0.8);
-                }
-            }
-        }
-
-        > .adult {
-            filter: blur(5px);
-        }
+    &:last-child {
+      margin-bottom: 0;
     }
+
+    > .planned {
+      margin-left: 10px;
+    }
+
+    > h4 {
+      margin-left: 20px;
+      font-weight: 600;
+
+      > a {
+        color: black;
+        text-decoration: none;
+        transition: color 0.01s ease-in-out;
+
+        &:hover {
+          color: rgb(1, 180, 228);
+        }
+      }
+
+      > span {
+        display: block;
+        margin-left: 14px;
+        color: rgba(0,0,0,0.5);
+        font-weight: 400;
+
+        > .main-info {
+          color: rgba(0,0,0,0.8);
+        }
+      }
+    }
+
+    > .adult {
+      filter: blur(5px);
+    }
+  }
 }

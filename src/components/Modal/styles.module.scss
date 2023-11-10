@@ -1,27 +1,27 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #00000073;
-    z-index: 3;
-    animation-name: modal-appear;
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-iteration-count: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000073;
+  z-index: 3;
+  animation-name: modal-appear;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
 }
 
 .hidden-body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 @keyframes modal-appear {
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }

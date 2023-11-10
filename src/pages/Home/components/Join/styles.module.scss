@@ -1,65 +1,64 @@
 .join {
-    background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces_filter(duotone,190235,ad47dd)/lMnoYqPIAVL0YaLP5YjRy7iwaYv.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 30px;
-    margin-bottom: 30px;
+  background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces_filter(duotone,190235,ad47dd)/lMnoYqPIAVL0YaLP5YjRy7iwaYv.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 30px;
+  margin-bottom: 30px;
     
-    > h2 {
-        font-size: 32px;
-        font-weight: 700;
+  > h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+  }
+
+  > section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px 0;
+
+    > div {
+      margin-right: 20px;
+
+      > p {
         color: white;
+        font-size: 19px;
+        max-width: 721px;
+        margin-bottom: 35px;
+
+        > em {
+          opacity: 0.7;
+        }
+      }
+
+      > a {
+        text-decoration: none;
+        background-color: #805be7;
+        border-radius: 5px;
+        color: white;
+        font-size: 17px;
+        padding: 12px 18px;
+        font-weight: 600;
+        margin-top: 20px;
+      }
     }
 
-    > section {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin: 20px 0;
-
-        > div {
-            margin-right: 20px;
-
-            > p {
-                color: white;
-                font-size: 19px;
-                max-width: 721px;
-                margin-bottom: 35px;
-
-                > em {
-                    opacity: 0.7;
-                }
-            }
-
-            > a {
-                text-decoration: none;
-                background-color: #805be7;
-                border-radius: 5px;
-                color: white;
-                font-size: 17px;
-                padding: 12px 18px;
-                font-weight: 600;
-                margin-top: 20px;
-            }
-        }
-
-        > ul {
-
-            > li {
-                color: white;
-                opacity: 0.8;
-            }
-        }
+    > ul {
+      > li {
+        color: white;
+        opacity: 0.8;
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 1285px) {
-    .join {
-        > section {
-            > ul {
-                margin: 20px 0 0 20px;
-            }
-        }
+  .join {
+    > section {
+      > ul {
+        margin: 20px 0 0 20px;
+      }
     }
+  }
 }

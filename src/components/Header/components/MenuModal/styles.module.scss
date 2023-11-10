@@ -1,240 +1,240 @@
 .modal {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .menu {
-    background-color: white;
-    width: 300px;
+  background-color: white;
+  width: 300px;
+
+  > button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 20px 0 30px 15px;
+    padding: 5px;
+    padding-left: 0;
+
+    > img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+
+    > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+        
+      > img {
+        width: 154px;
+        height: 20px;
+        object-fit: contain;
+      }
+    }
 
     > button {
-        border: none;
-        background: none;
-        cursor: pointer;
-        margin: 20px 0 30px 15px;
-        padding: 5px;
-        padding-left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      background: none;
+      padding: 5px;
+      padding-right: 0;
+      cursor: pointer;
 
-        > img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
+      > img {
+        width: 29px;
+        height: 29px;
+        object-fit: contain;
+      }
     }
+  }
+
+  > section {
+    margin-top: 10px;
+    transition-timing-function: ease-in;
 
     > div {
+      border-bottom: 1px solid rgba(227, 227, 227, 1);
+    }
+
+    > div:nth-of-type(1) {
+      > label {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 0 15px;
+        padding: 0 20px;
 
-        > a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
-            
-            > img {
-                width: 154px;
-                height: 20px;
-                object-fit: contain;
-            }
+        > img {
+          width: 16px;
+          height: 16px;
+          object-fit: cover;
         }
+  
+        > div {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          padding: 0;
+          margin-left: 12px;
 
-        > button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+          > input {
+            width: 100%;
+            padding: 12px 0;
+            font-size: 13px;
+            font-style: italic;
+            color: #acacac;
+            outline: none;
+            border: none;
+      
+            &::placeholder {
+              color: #acacac;
+            }
+          }
+
+          > button {
             border: none;
             background: none;
-            padding: 5px;
-            padding-right: 0;
             cursor: pointer;
+            padding: 5px;
+            margin-right: -8px;
+
+            &:hover {
+              > img {
+                filter: brightness(0%);
+              }
+            }
 
             > img {
-                width: 29px;
-                height: 29px;
-                object-fit: contain;
+              width: 19px;
+              height: 19px;
+              object-fit: cover;
+              filter: brightness(85%);
+              transition: filter 0.05s ease-in;                            
             }
+          }
         }
+      }
     }
 
-    > section {
-        margin-top: 10px;
-        transition-timing-function: ease-in;
+    > button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border: none;
+      background-color: white;
+      outline: none;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(227, 227, 227, 1);
+      transition-property: background-color;
+      transition-duration: 0.05s;
+      transition-timing-function: ease-out;
 
-        > div {
-            border-bottom: 1px solid rgba(227, 227, 227, 1);
-        }
+      &:hover {
+        background-color: #efefef;
+      }
 
-        > div:nth-of-type(1) {
-            > label {
-                display: flex;
-                align-items: center;
-                padding: 0 20px;
-
-                > img {
-                    width: 16px;
-                    height: 16px;
-                    object-fit: cover;
-                }
-        
-                > div {
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    padding: 0;
-                    margin-left: 12px;
-
-                    > input {
-                        width: 100%;
-                        padding: 12px 0;
-                        font-size: 13px;
-                        font-style: italic;
-                        color: #acacac;
-                        outline: none;
-                        border: none;
-                
-                        &::placeholder {
-                            color: #acacac;
-                        }
-                    }
-
-                    > button {
-                        border: none;
-                        background: none;
-                        cursor: pointer;
-                        padding: 5px;
-                        margin-right: -8px;
-
-                        &:hover {
-                            > img {
-                                filter: brightness(0%);
-                            }
-                        }
-
-                        > img {
-                            width: 19px;
-                            height: 19px;
-                            object-fit: cover;
-                            filter: brightness(85%);
-                            transition: filter 0.05s ease-in;                            
-                        }
-                    }
-                }
-            }
-        }
-
-        > button {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            border: none;
-            background-color: white;
-            outline: none;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(227, 227, 227, 1);
-            transition-property: background-color;
-            transition-duration: 0.05s;
-            transition-timing-function: ease-out;
-
-            &:hover {
-                background-color: #efefef;
-            }
-
-            > div {
-                width: 1300px;
-                padding: 5px 20px;
-                display: flex;
-                align-items: center;
-
-                > img {
-                    width: 16px;
-                    height: 16px;
-                    object-fit: cover;
-                }
-    
-                > p {
-                    margin-left: 6px;
-                    font-size: 16px;
-                    text-align: left;
-    
-                    > span {
-                        font-weight: 600;
-                    }
-                }
-            }
-        }
-
-        > .error {
-            padding: 20px 0;
-            font-weight: 700;
-            font-size: 19px;
-            text-align: center;
-            color: rgba(33,37,41,0.5);
-        }
-    }
-
-    > ul {
+      > div {
+        width: 1300px;
+        padding: 5px 20px;
         display: flex;
         align-items: center;
-        flex-direction: column;
-        margin-top: 10px;
-        padding: 0;
 
-        > li {
-            text-align: center;
-            color: rgb(3, 37, 65);
-            list-style: none;
+        > img {
+          width: 16px;
+          height: 16px;
+          object-fit: cover;
         }
 
-        > .media-link {
-            padding: 5px;
-            cursor: pointer;
+        > p {
+          margin-left: 6px;
+          font-size: 16px;
+          text-align: left;
+
+          > span {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    > .error {
+      padding: 20px 0;
+      font-weight: 700;
+      font-size: 19px;
+      text-align: center;
+      color: rgba(33,37,41,0.5);
+    }
+  }
+
+  > ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 0;
+
+    > li {
+      text-align: center;
+      color: rgb(3, 37, 65);
+      list-style: none;
+    }
+
+    > .media-link {
+      padding: 5px;
+      cursor: pointer;
+
+      &:hover {
+        > ul {
+          display: block;
+        }
+      }
+
+      > ul {
+        cursor: auto;
+        display: none;
+        background-color: #F0F0F0;
+        width: 173px;
+        padding: 8px 0;
+        margin-top: 5px;
+        border-radius: 4px;
+
+        > a {
+          text-decoration: none;
+          color: black;
+
+          > li {
+            list-style: none;
+            padding: 5px 0;
+            padding-right: 0;
+            font-weight: 400;
 
             &:hover {
-                > ul {
-                    display: block;
-                }
+              background-color: white;
+              transition: color 0.05s ease-in;
             }
-
-            > ul {
-                cursor: auto;
-                display: none;
-                background-color: #F0F0F0;
-                width: 173px;
-                padding: 8px 0;
-                margin-top: 5px;
-                border-radius: 4px;
-
-                > a {
-                    text-decoration: none;
-                    color: black;
-
-                    > li {
-                        list-style: none;
-                        padding: 5px 0;
-                        padding-right: 0;
-                        font-weight: 400;
-
-                        &:hover {
-                            background-color: white;
-                            transition: color 0.05s ease-in;
-                        }
-                    }
-                }
-            }
+          }
         }
-
-        > .link {
-            font-weight: 600;
-            margin: 5px 0;
-
-            > a {
-                padding: 5px;
-                text-decoration: none;
-                color: rgba(3, 37, 65, 1);
-            }
-        }
+      }
     }
+
+    > .link {
+      font-weight: 600;
+      margin: 5px 0;
+
+      > a {
+        padding: 5px;
+        text-decoration: none;
+        color: rgba(3, 37, 65, 1);
+      }
+    }
+  }
 }

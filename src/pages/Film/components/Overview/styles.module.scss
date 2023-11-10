@@ -1,419 +1,414 @@
 .overview {
-    display: flex;
-    justify-content: center;
-    padding: 30px 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left calc((50vw - 170px) - 340px) top;
-    background-color: #cccccc;
-    border-bottom: 1px solid #cccccc;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left calc((50vw - 170px) - 340px) top;
+  background-color: #cccccc;
+  border-bottom: 1px solid #cccccc;
+  width: 100%;
     
+  > div {
+    width: 1300px;
+    display: flex;
+    align-items: center;
+
     > div {
-        width: 1300px;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+    }
+
+    > .film-poster {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-right: 20px;
+      width: 300px;
+
+      > button {
+        border: none;
+        background: none;
+        width: 100%;
+        height: 450px;
+        cursor: pointer;
 
         > div {
-            display: flex;
-            flex-direction: column;
-    
-            // > div {
-            //     display: flex;
-            //     align-items: center;
-            // }
-        }
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
-        > .film-poster {
-            border-radius: 8px;
-            overflow: hidden;
-            margin-right: 20px;
-            width: 300px;
+          &:after {
+            position: absolute;
+            background-color: rgba(32,32,32,0.8);
+            backdrop-filter: blur(15px);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            content: "";
+            opacity: 0;
+            transition: linear 0.2s;
+          }
 
-            > button {
-                border: none;
-                background: none;
-                width: 100%;
-                height: 450px;
-                cursor: pointer;
-
-                > div {
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-    
-                    &:after {
-                        position: absolute;
-                        background-color: rgba(32,32,32,0.8);
-                        backdrop-filter: blur(15px);
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        content: "";
-                        opacity: 0;
-                        transition: linear 0.2s;
-                    }
-    
-                    &:hover {
-                        &:after {
-                            opacity: 1;
-                        }
-    
-                        > div {
-                            opacity: 1;
-                        }
-                    }
-        
-                    > div {
-                        display: flex;
-                        align-items: center;
-                        opacity: 0;
-                        transition: linear 0.2s;
-                        z-index: 2;
-        
-                        > img {
-                            width: 21px;
-                            height: 21px;
-                            object-fit: cover;
-                            margin-right: 6px;
-                        }
-                        
-                        > span {
-                            color: white;
-                            font-size: 21px;
-                        }
-                    }
-                }
-            }
-
-            > .no-image {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 450px;
-                background-color: #dadada;
-                cursor: default;
-
-                > img {
-                    width: 160px;
-                    height: 160px;
-                    object-fit: cover;
-                }
-            }
-    
-            > .now-streaming {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: rgb(3, 37, 65);
-                padding: 10px 0;
-    
-                > img {
-                    width: 36px;
-                    height: 36px;
-                    object-fit: cover;
-                    margin-right: 12px;
-                    border-radius: 4px;
-                }
-    
-                > div {
-                    > h4 {
-                        color: lightgray;
-                        font-weight: 400;
-                        opacity: 0.8;
-                    }
-        
-                    > h3 {
-                        color: white;
-                        font-size: 16px;
-                        font-weight: 600;
-                    }
-                }
-            }
-        }
-
-        > .film-info {
-            margin-left: 20px;
-    
-            > h2 {
-                font-size: 35px;
-                font-weight: 700;
-
-                > span {
-                    font-size: 35px;
-                    opacity: 0.8;
-                    font-weight: 400;
-                }
+          &:hover {
+            &:after {
+              opacity: 1;
             }
 
             > div {
-                display: flex;
-                align-items: center;
+              opacity: 1;
             }
-    
-            > div:nth-of-type(1) {
-                flex-wrap: wrap;
+          }
 
-                > span {
-                    margin: 2px 4px 0 0;
-                }
-                
-                > .date {
-                    margin-right: 7px;
-                    display: flex;
-                    align-items: center;
+          > div {
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: linear 0.2s;
+            z-index: 2;
 
-                    &:after {
-                        content: "";
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 50%;
-                        background-color: black;
-                        margin-left: 8px;
-                        margin-top: 2.5px;
-                    }
-                }
-
-                > .runtime {
-                    margin: 2px 0 0 3px;
-                    display: flex;
-                    align-items: center;
-
-                    &:before {
-                        content: "";
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 50%;
-                        background-color: black;
-                        margin-right: 8px;
-                        margin-top: 2.5px;
-                    }
-                }
+            > img {
+              width: 21px;
+              height: 21px;
+              object-fit: cover;
+              margin-right: 6px;
             }
-    
-            > div:nth-of-type(2) {
-                margin-top: 10px;
-                flex-wrap: wrap;
-    
-                > div {
-                    margin: 10px 20px 0 0;
-                    display: flex;
-                    align-items: center;
-    
-                    &:first-child {
-                        position: relative;
-                        width: 110px;
-    
-                        > .overview-percentage {
-                            width: 60px;
-                            height: 60px;
-                            cursor: pointer;
-    
-                            &:hover {
-                                transform: scale(1.2);
-                                transition-duration: 0.3s;
-                            }
-                        }
-    
-                        > span {
-                            position: absolute;
-                            right: 0;
-                            font-weight: 700;
-                            width: 40px;
-                        }
-                    }
-                }
-    
-                > .actions-container {
-                    > div {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 46px;
-                        height: 46px;
-                        border-radius: 50%;
-                        background-color: rgb(3, 37, 65);
-                        cursor: pointer;
-                        position: relative;
-                        margin-right: 15px;
-
-                        &:last-child {
-                            margin-right: 0;
-                        }
-
-                        &:hover {
-                            > span {
-                                visibility: visible;
-                            }
-                        }
-        
-                        > img {
-                            object-fit: cover;
-                            width: 16px;
-                            height: 16px;
-                        }
-
-                        > span {
-                            visibility: hidden;
-                            transition: visibility 50ms ease-in-out;
-                            width: 190px;
-                            background-color: rgba(3, 37, 65, 1);
-                            color: #fff;
-                            text-align: center;
-                            border-radius: 4px;
-                            padding: 5px 0;
-                            position: absolute;
-                            top: 125%;
-                            left: -30%;
-                            margin-left: -60px;
-                            cursor: auto;
-                            z-index: 5;
-            
-                            &:after {
-                                content: "";
-                                position: absolute;
-                                bottom: 100%;
-                                left: 50%;
-                                margin-left: -5px;
-                                border-width: 7px;
-                                border-style: solid;
-                                border-color: transparent transparent rgba(3, 37, 65, 1) transparent;
-                            }
-                        }
-                    }
-                }
-                
-                > button {
-                    border: none;
-                    background: none;
-                    margin-top: 10px;
-                    margin-right: 0;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    font-size: 16px;
-                    font-weight: 600;
-
-                    &:hover {
-                        color: #E8E8E8;
-                        transition: linear 0.1s;
-                    }
-
-                    > img {
-                        width: 22px;
-                        height: 22px;
-                        object-fit: cover;
-                        margin-right: 5px;
-                    }
-                }
+              
+            > span {
+              color: white;
+              font-size: 21px;
             }
-    
-            > .tagline {
-                font-size: 18px;
-                font-weight: 400;
-                font-style: italic;
-                opacity: 0.7;
-                margin-top: 20px;
-            }
-    
-            > h3 {
-                font-size: 21px;
-                font-weight: 600;
-                margin: 20px 0 8px 0;
-            }
-
-            > p {
-                max-width: 980px;
-            }
-
-            > .creator-container {
-                margin-top: 10px;
-                flex-wrap: wrap;
-
-                > div {
-                    margin-top: 10px;
-                    margin-right: 200px;
-
-                    &:last-child {
-                        margin-right: 0;
-                    }
-
-                    > a {
-                        text-decoration: none;
-                        color: black;
-
-                        > h4 {
-                            transition: color 50ms ease-in-out;
-    
-                            &:hover {
-                                color: rgba(0,0,0,0.5);
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
+
+      > .no-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 450px;
+        background-color: #dadada;
+        cursor: default;
+
+        > img {
+          width: 160px;
+          height: 160px;
+          object-fit: cover;
+        }
+      }
+
+      > .now-streaming {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(3, 37, 65);
+        padding: 10px 0;
+
+        > img {
+          width: 36px;
+          height: 36px;
+          object-fit: cover;
+          margin-right: 12px;
+          border-radius: 4px;
+        }
+
+        > div {
+          > h4 {
+            color: lightgray;
+            font-weight: 400;
+            opacity: 0.8;
+          }
+
+          > h3 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+      }
     }
+
+    > .film-info {
+      margin-left: 20px;
+
+      > h2 {
+        font-size: 35px;
+        font-weight: 700;
+
+        > span {
+          font-size: 35px;
+          opacity: 0.8;
+          font-weight: 400;
+        }
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+
+      > div:nth-of-type(1) {
+        flex-wrap: wrap;
+
+        > span {
+          margin: 2px 4px 0 0;
+        }
+          
+        > .date {
+          margin-right: 7px;
+          display: flex;
+          align-items: center;
+
+          &:after {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: black;
+            margin-left: 8px;
+            margin-top: 2.5px;
+          }
+        }
+
+        > .runtime {
+          margin: 2px 0 0 3px;
+          display: flex;
+          align-items: center;
+
+          &:before {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: black;
+            margin-right: 8px;
+            margin-top: 2.5px;
+          }
+        }
+      }
+
+      > div:nth-of-type(2) {
+        margin-top: 10px;
+        flex-wrap: wrap;
+
+        > div {
+          margin: 10px 20px 0 0;
+          display: flex;
+          align-items: center;
+
+          &:first-child {
+            position: relative;
+            width: 110px;
+
+            > .overview-percentage {
+              width: 60px;
+              height: 60px;
+              cursor: pointer;
+
+              &:hover {
+                transform: scale(1.2);
+                transition-duration: 0.3s;
+              }
+            }
+
+            > span {
+              position: absolute;
+              right: 0;
+              font-weight: 700;
+              width: 40px;
+            }
+          }
+        }
+
+        > .actions-container {
+          > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background-color: rgb(3, 37, 65);
+            cursor: pointer;
+            position: relative;
+            margin-right: 15px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+
+            &:hover {
+              > span {
+                visibility: visible;
+              }
+            }
+
+            > img {
+              object-fit: cover;
+              width: 16px;
+              height: 16px;
+            }
+
+            > span {
+              visibility: hidden;
+              transition: visibility 50ms ease-in-out;
+              width: 190px;
+              background-color: rgba(3, 37, 65, 1);
+              color: #fff;
+              text-align: center;
+              border-radius: 4px;
+              padding: 5px 0;
+              position: absolute;
+              top: 125%;
+              left: -30%;
+              margin-left: -60px;
+              cursor: auto;
+              z-index: 5;
+
+              &:after {
+                content: "";
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 7px;
+                border-style: solid;
+                border-color: transparent transparent rgba(3, 37, 65, 1) transparent;
+              }
+            }
+          }
+        }
+          
+        > button {
+          border: none;
+          background: none;
+          margin-top: 10px;
+          margin-right: 0;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          font-size: 16px;
+          font-weight: 600;
+
+          &:hover {
+            color: #E8E8E8;
+            transition: linear 0.1s;
+          }
+
+          > img {
+            width: 22px;
+            height: 22px;
+            object-fit: cover;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      > .tagline {
+        font-size: 18px;
+        font-weight: 400;
+        font-style: italic;
+        opacity: 0.7;
+        margin-top: 20px;
+      }
+
+      > h3 {
+        font-size: 21px;
+        font-weight: 600;
+        margin: 20px 0 8px 0;
+      }
+
+      > p {
+        max-width: 980px;
+      }
+
+      > .creator-container {
+        margin-top: 10px;
+        flex-wrap: wrap;
+
+        > div {
+          margin-top: 10px;
+          margin-right: 200px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          > a {
+            text-decoration: none;
+            color: black;
+
+            > h4 {
+              transition: color 50ms ease-in-out;
+
+              &:hover {
+                color: rgba(0,0,0,0.5);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 1385px) {
-    .overview {
-        padding: 30px;
-        background-position: center top;
+  .overview {
+    padding: 30px;
+    background-position: center top;
 
-        > div {
-            flex-direction: column;
+    > div {
+      flex-direction: column;
 
-            > .film-poster {
-                margin: 0;
-            }
-    
-            > .film-info {
-                margin: 40px 0 0 0;
+      > .film-poster {
+        margin: 0;
+      }
 
-                > p {
-                    max-width: 680px;
-                }
+      > .film-info {
+        margin: 40px 0 0 0;
 
-                > .creator-container {
-                    > div {
-                        margin-right: 150px;
-                    }
-                }
-            }
+        > p {
+          max-width: 680px;
         }
+
+        > .creator-container {
+          > div {
+            margin-right: 150px;
+          }
+        }
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .overview {
-        > div {
-            > .film-info {
-                > div:nth-of-type(2) {
-                    > .actions-container {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 10px;
+  .overview {
+    > div {
+      > .film-info {
+        > div:nth-of-type(2) {
+          > .actions-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
 
-                        > div {
-                            margin-right: 0;
+            > div {
+              margin-right: 0;
 
-                            > span {
-                                width: 150px;
-                                left: 10%;
-                            }
-                        }
-                    }
-                }
+              > span {
+                width: 150px;
+                left: 10%;
+              }
             }
+          }
         }
+      }
     }
+  }
 }

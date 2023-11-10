@@ -1,155 +1,155 @@
 .credits {
-    margin-top: 20px;
-    position: relative;
+  margin-top: 20px;
+  position: relative;
 
-    > .filter-buttons {
+  > .filter-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+
+    button {
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: color 50ms ease-in-out;
+    }
+
+    > .clear {
+      padding: 8px;
+      margin-right: 10px;
+      color: rgba(1, 180, 228, 1);
+
+      &:hover {
+        color: rgba(30, 213, 169, 1);
+      }
+    }
+
+    > .media-type, > .department {
+      position: relative;
+
+      > button {
+        padding: 8px 25px 8px 8px;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 6px solid black;
+          transition: border-top-color 50ms ease-in-out;
+        }
+
+        &:hover {
+          color: rgba(33, 37, 41, 0.7);
+
+          &::after {
+            border-top-color: rgba(33, 37, 41, 0.7);
+          }
+        }
+
+        &.active {
+          color: rgba(33, 37, 41, 0.7);
+
+          &::after {
+            border-top-color: rgba(33, 37, 41, 0.7);
+          }
+        }
+      }
+
+      > div {
+        cursor: auto;
+        color: black;
         position: absolute;
-        top: 0;
-        right: 0;
-        display: flex;
+        top: 100%;
+        left: -2px;
+        width: 173px;
+        padding: 8px 0;
+        background-color: white;
+        border: 1px solid rgba(0,0,0,0.15);
+        border-radius: 4px;
 
-        button {
-            border: none;
-            background: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 50ms ease-in-out;
+        > button {
+          border: none;
+          background: none;
+          cursor: pointer;
+          font-size: 16px;
+          width: 100%;
+          padding: 5px 0 5px 24px;
+          text-align: left;
+          transition: color 50ms ease-in-out;
+            
+          &:hover {
+            background-color: #F0F0F0;
+          }
+
+          > span {
+            color: gray;
+            margin-left: 3px;
+          }
         }
-
-        > .clear {
-            padding: 8px;
-            margin-right: 10px;
-            color: rgba(1, 180, 228, 1);
-
-            &:hover {
-                color: rgba(30, 213, 169, 1);
-            }
-        }
-
-        > .media-type, > .department {
-            position: relative;
-
-            > button {
-                padding: 8px 25px 8px 8px;
-                position: relative;
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    right: 8px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    border-left: 4px solid transparent;
-                    border-right: 4px solid transparent;
-                    border-top: 6px solid black;
-                    transition: border-top-color 50ms ease-in-out;
-                }
-
-                &:hover {
-                    color: rgba(33, 37, 41, 0.7);
-
-                    &::after {
-                        border-top-color: rgba(33, 37, 41, 0.7);
-                    }
-                }
-
-                &.active {
-                    color: rgba(33, 37, 41, 0.7);
-    
-                    &::after {
-                        border-top-color: rgba(33, 37, 41, 0.7);
-                    }
-                }
-            }
-
-            > div {
-                cursor: auto;
-                color: black;
-                position: absolute;
-                top: 100%;
-                left: -2px;
-                width: 173px;
-                padding: 8px 0;
-                background-color: white;
-                border: 1px solid rgba(0,0,0,0.15);
-                border-radius: 4px;
-    
-                > button {
-                    border: none;
-                    background: none;
-                    cursor: pointer;
-                    font-size: 16px;
-                    width: 100%;
-                    padding: 5px 0 5px 24px;
-                    text-align: left;
-                    transition: color 50ms ease-in-out;
-                    
-                    &:hover {
-                        background-color: #F0F0F0;
-                    }
-    
-                    > span {
-                        color: gray;
-                        margin-left: 3px;
-                    }
-                }
-            }
-        }
-
-        > .media-type {
-            margin-right: 10px;
-        }
+      }
     }
 
-    > .department-container {
-        margin-bottom: 30px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        > h3 {
-            font-size: 21px;
-            font-weight: 600;
-        }
+    > .media-type {
+      margin-right: 10px;
     }
+  }
+
+  > .department-container {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    > h3 {
+      font-size: 21px;
+      font-weight: 600;
+    }
+  }
 }
 
 @media only screen and (max-width: 1390px) {
-    .credits {
-        > .filter-buttons {
-            > .media-type, > .department {
-                > div {
-                    width: 140px;
+  .credits {
+    > .filter-buttons {
+      > .media-type, > .department {
+        > div {
+          width: 140px;
 
-                    > button {
-                        padding-left: 20px;
-                    }
-                }
-            }
+          > button {
+            padding-left: 20px;
+          }
         }
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .credits {
-        margin-top: 60px;
+  .credits {
+    margin-top: 60px;
 
-        > .filter-buttons {
-            top: -40px;
-            left: 0;
+    > .filter-buttons {
+      top: -40px;
+      left: 0;
 
-            > .clear {
-                order: 2;
-                margin-right: 0;
-                margin-left: 10px;
-            }
+      > .clear {
+        order: 2;
+        margin-right: 0;
+        margin-left: 10px;
+      }
 
-            > .media-type {
-                > button {
-                    padding-left: 0;
-                }
-            }
+      > .media-type {
+        > button {
+          padding-left: 0;
         }
+      }
     }
+  }
 }

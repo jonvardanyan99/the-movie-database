@@ -1,61 +1,61 @@
 .popular-people {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
 
-    > article {
-        margin-left: 35px;
+  > article {
+    margin-left: 35px;
 
-        > h2 {
-            font-weight: 700;
-        }
-
-        > div:nth-of-type(2) {
-            width: 1315px;
-            margin-top: 25px;
-        }
+    > h2 {
+      font-weight: 700;
     }
+
+    > div:nth-of-type(2) {
+      width: 1315px;
+      margin-top: 25px;
+    }
+  }
 }
 
 @media only screen and (max-width: 1380px) {
-    .popular-people {
-        > article {
-            > div:nth-of-type(2) {
-                width: 1045px;
-            }
-        }
+  .popular-people {
+    > article {
+      > div:nth-of-type(2) {
+        width: 1045px;
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 1115px) {
-    .popular-people {
-        > article {
-            > div:nth-of-type(2) {
-                width: 775px;
-            }
-        }
+  .popular-people {
+    > article {
+      > div:nth-of-type(2) {
+        width: 775px;
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 850px) {
-    .popular-people {
-        > article {
-            > div:nth-of-type(2) {
-                width: 505px;
-            }
-        }
+  .popular-people {
+    > article {
+      > div:nth-of-type(2) {
+        width: 505px;
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 570px) {
-    .popular-people {
-        > article {
-            margin-left: 0;
+  .popular-people {
+    > article {
+      margin-left: 0;
 
-            > div:nth-of-type(2) {
-                width: 235px;
-                justify-content: unset;
-            }
-        }
+      > div:nth-of-type(2) {
+        width: 235px;
+        justify-content: unset;
+      }
     }
+  }
 }

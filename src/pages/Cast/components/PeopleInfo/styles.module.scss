@@ -1,168 +1,168 @@
 .people-info {
-    padding: 30px;
-    padding-left: 300px;
+  padding: 30px;
+  padding-left: 300px;
 
-    > span {
-        margin-right: 300px;
+  > span {
+    margin-right: 300px;
+  }
+
+  > section {
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+
+    > div {
+      width: 300px;
+
+      > h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 20px;
+
+        > span {
+          font-weight: 400;
+          opacity: 0.6;
+        }
+      }
     }
 
-    > section {
+    > .cast {
+      margin-right: 30px;
+
+      > div {
         display: flex;
-        justify-content: space-between;
-        width: 900px;
+        align-items: center;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        > a {
+          margin-right: 25px;
+
+          > img {
+            width: 66px;
+            height: 66px;
+            object-fit: cover;
+            border-radius: 4px;
+          }
+
+          > .no-image {
+            width: 66px;
+            height: 66px;
+            background-color: #DBDBDB;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > img {
+              width: 36px;
+              height: 36px;
+              object-fit: cover;
+            }
+          }
+        }
 
         > div {
-            width: 300px;
-
-            > h2 {
-                font-size: 22px;
-                font-weight: 600;
-                margin-bottom: 20px;
-
-                > span {
-                    font-weight: 400;
-                    opacity: 0.6;
-                }
+          > a {
+            > h4 {
+              color: black;
+              display: inline-block;
             }
-        }
+          }
 
-        > .cast {
-            margin-right: 30px;
+          > p {
+            font-size: 14.5px;
 
-            > div {
-                display: flex;
-                align-items: center;
-                margin-bottom: 10px;
-
-                &:last-child {
-                    margin-bottom: 0;
-                }
-
-                > a {
-                    margin-right: 25px;
-
-                    > img {
-                        width: 66px;
-                        height: 66px;
-                        object-fit: cover;
-                        border-radius: 4px;
-                    }
-    
-                    > .no-image {
-                        width: 66px;
-                        height: 66px;
-                        background-color: #DBDBDB;
-                        border-radius: 8px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-    
-                        > img {
-                            width: 36px;
-                            height: 36px;
-                            object-fit: cover;
-                        }
-                    }
-                }
-
-                > div {
-                    > a {
-                        > h4 {
-                            color: black;
-                            display: inline-block;
-                        }
-                    }
-
-                    > p {
-                        font-size: 14.5px;
-
-                        > span {
-                            color: rgba(0,0,0,.5);
-                        }
-                    }
-                }
+            > span {
+              color: rgba(0,0,0,.5);
             }
+          }
         }
+      }
     }
+  }
 }
 
 @media only screen and (max-width: 1500px) {
-    .people-info {
-        padding-left: 200px;
+  .people-info {
+    padding-left: 200px;
 
-        > span {
-            margin-right: 200px;
-        }
+    > span {
+      margin-right: 200px;
     }
+  }
 }
 
 @media only screen and (max-width: 1300px) {
-    .people-info {
-        padding-left: 100px;
+  .people-info {
+    padding-left: 100px;
 
-        > span {
-            margin-right: 100px;
-        }
+    > span {
+      margin-right: 100px;
     }
+  }
 }
 
 @media only screen and (max-width: 1030px) {
-    .people-info {
-        padding-left: 100px;
+  .people-info {
+    padding-left: 100px;
 
-        > section {
-            width: 100%;
-        }
+    > section {
+      width: 100%;
     }
+  }
 }
 
 @media only screen and (max-width: 800px) {
-    .people-info {
-        padding-left: 30px;
+  .people-info {
+    padding-left: 30px;
 
-        > span {
-            margin-right: 0;
-        }
+    > span {
+      margin-right: 0;
     }
+  }
 }
 
 @media only screen and (max-width: 650px) {
-    .people-info {
-        padding-left: 30px;
+  .people-info {
+    padding-left: 30px;
 
-        > span {
-            margin-right: 0;
-        }
-
-        > section {
-            flex-direction: column;
-            align-items: center;
-
-            > div {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-                width: 250px;
-
-                > div {
-                    width: 100%;
-                }
-            }
-
-            > .cast {
-                border-bottom: 1px solid #d7d7d7;
-                padding-bottom: 20px;
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-        }
+    > span {
+      margin-right: 0;
     }
+
+    > section {
+      flex-direction: column;
+      align-items: center;
+
+      > div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 250px;
+
+        > div {
+          width: 100%;
+        }
+      }
+
+      > .cast {
+        border-bottom: 1px solid #d7d7d7;
+        padding-bottom: 20px;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 400px) {
-    .people-info {
-        > span {
-            margin-right: 0;
-        }
+  .people-info {
+    > span {
+      margin-right: 0;
     }
+  }
 }

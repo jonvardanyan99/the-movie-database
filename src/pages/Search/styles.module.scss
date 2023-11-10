@@ -1,111 +1,111 @@
 .search {
-    padding: 30px 0;
-    display: flex;
-    justify-content: center;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
 
-    > section {
-        width: 260px;
-
-        > div {
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(227, 227, 227, 1);
-
-            > div {
-                padding: 20px;
-                font-size: 19px;
-                font-weight: 600;
-                color: white;
-                background-color: rgba(1, 180, 228, 1);
-            }
-
-            > ul {
-                padding: 8px 0;
-
-                > a {
-                    text-decoration: none;
-                    color: black;
-
-                    &.active {
-                        > li {
-                            background-color: #E8E8E8;
-
-                            > span:first-child {
-                                font-weight: bold;
-                            }
-
-                            > .total-results {
-                                background-color: white;
-                            }
-                        }
-                    }
-
-                    > li {
-                        padding: 10px 20px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        transition: all 50ms ease-in-out;
-                        
-                        &:hover {
-                            background-color: #E8E8E8;
-    
-                            > .total-results {
-                                background-color: white;
-                            }
-                        }
-    
-                        > .total-results {
-                            font-size: 15px;
-                            font-weight: 300;
-                            padding: 2px 10px;
-                            border-radius: 8px;
-                            background-color: #E8E8E8;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-        }
-
-        > p {
-            color: #666;
-            margin-top: 20px;
-
-            > img {
-                width: 23px;
-                height: 23px;
-                object-fit: cover;
-                vertical-align: bottom;
-                margin-right: 4px;
-            }
-        }
-    }
+  > section {
+    width: 260px;
 
     > div {
-        width: 1000px;
-        margin-left: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(227, 227, 227, 1);
+
+      > div {
+        padding: 20px;
+        font-size: 19px;
+        font-weight: 600;
+        color: white;
+        background-color: rgba(1, 180, 228, 1);
+      }
+
+      > ul {
+        padding: 8px 0;
+
+        > a {
+          text-decoration: none;
+          color: black;
+
+          &.active {
+            > li {
+              background-color: #E8E8E8;
+
+              > span:first-child {
+                font-weight: bold;
+              }
+
+              > .total-results {
+                background-color: white;
+              }
+            }
+          }
+
+          > li {
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 50ms ease-in-out;
+              
+            &:hover {
+              background-color: #E8E8E8;
+
+              > .total-results {
+                background-color: white;
+              }
+            }
+
+            > .total-results {
+              font-size: 15px;
+              font-weight: 300;
+              padding: 2px 10px;
+              border-radius: 8px;
+              background-color: #E8E8E8;
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
+
+    > p {
+      color: #666;
+      margin-top: 20px;
+
+      > img {
+        width: 23px;
+        height: 23px;
+        object-fit: cover;
+        vertical-align: bottom;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  > div {
+    width: 1000px;
+    margin-left: 30px;
+  }
 }
 
 @media only screen and (max-width: 1360px) {
-    .search { 
-        flex-direction: column;
-        align-items: center;
+  .search { 
+    flex-direction: column;
+    align-items: center;
 
-        > div {
-            margin-top: 30px;
-            margin-left: 0;
-        }
+    > div {
+      margin-top: 30px;
+      margin-left: 0;
     }
+  }
 }
 
 @media only screen and (max-width: 1070px) {
-    .search {
-        padding: 30px 10px;
+  .search {
+    padding: 30px 10px;
 
-        > div {
-            width: 95%;
-        }
+    > div {
+      width: 95%;
     }
+  }
 }
