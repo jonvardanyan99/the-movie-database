@@ -39,15 +39,7 @@ export const PeopleDataDisplay = ({ loading, data }) => {
               <Link to={`/person/${result.id}`}>
                 <h3>{result.name}</h3>
               </Link>
-              <p>
-                {result.known_for.map(item => item.title || item.name).join(', ').length > 27
-                  ? result.known_for
-                      .map(item => item.title || item.name)
-                      .join(', ')
-                      .slice(0, 27)
-                      .concat('...')
-                  : result.known_for.map(item => item.title || item.name).join(', ')}
-              </p>
+              <p>{result.known_for.map(item => item.title || item.name).join(', ')}</p>
             </div>
           </div>
         ))

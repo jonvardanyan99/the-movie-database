@@ -54,13 +54,7 @@ export const SearchDataDisplay = ({ loading, data }) => {
               <h2>{name}</h2>
             </Link>
             {date && <p>{format(new Date(date), 'LLLL d, y')}</p>}
-            {result.overview && (
-              <p className={styles.overview}>
-                {result.overview.length > 225
-                  ? `${result.overview.slice(0, 225)}...`
-                  : result.overview}
-              </p>
-            )}
+            {result.overview && <p className={styles.overview}>{result.overview}</p>}
           </div>
         </div>
       ) : (

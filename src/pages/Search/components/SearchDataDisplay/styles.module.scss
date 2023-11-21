@@ -37,6 +37,7 @@
 
     > div {
       padding: 10px 15px;
+      overflow: hidden;
 
       > a {
         text-decoration: none;
@@ -60,6 +61,9 @@
       > .overview {
         margin-top: 20px;
         color: black !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

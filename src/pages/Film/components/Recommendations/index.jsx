@@ -49,7 +49,7 @@ export const Recommendations = ({ loading, name }) => {
             </Link>
             <div>
               <Link to={`/${result.media_type}/${result.id}`}>
-                <h4>{filmName.length > 25 ? `${filmName.slice(0, 25)}...` : filmName}</h4>
+                <h4>{filmName}</h4>
               </Link>
               <span>{Math.round(result.vote_average * 10)}%</span>
             </div>
