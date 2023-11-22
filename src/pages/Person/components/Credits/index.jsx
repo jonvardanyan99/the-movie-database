@@ -1,20 +1,10 @@
 import PropTypes from 'prop-types';
 import { React, useEffect, useRef, useState } from 'react';
 
-import { Loader } from '../../../../components/Loader';
-import { LoaderSmall } from '../../../../components/Loader/LoaderSmall';
 import { Department } from './components/Department';
 import styles from './styles.module.scss';
 
-export const Credits = ({
-  loading,
-  name,
-  knownForDepartment,
-  creditsLoading,
-  creditsData,
-  movieCount,
-  tvCount,
-}) => {
+export const Credits = ({ name, knownForDepartment, creditsData, movieCount, tvCount }) => {
   const [mediaTypeVisible, setMediaTypeVisible] = useState(false);
   const [departmentTypeVisible, setDepartmentTypeVisible] = useState(false);
   const [mediaType, setMediaType] = useState('all');
@@ -159,87 +149,83 @@ export const Credits = ({
 
   return (
     <div className={styles.credits}>
-      {!noResults &&
-        (creditsLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <div className={styles['filter-buttons']}>
-              {mediaType !== 'all' || departmentType !== 'all' ? (
-                <button type="button" className={styles.clear} onClick={handleClearTypes}>
-                  Clear
-                </button>
-              ) : null}
-              <div className={styles['media-type']}>
-                <button
-                  type="button"
-                  className={mediaTypeVisible ? styles.active : ''}
-                  ref={mediaTypeRef}
-                  onClick={e => {
-                    e.stopPropagation();
+      {!noResults ? (
+        <>
+          <div className={styles['filter-buttons']}>
+            {mediaType !== 'all' || departmentType !== 'all' ? (
+              <button type="button" className={styles.clear} onClick={handleClearTypes}>
+                Clear
+              </button>
+            ) : null}
+            <div className={styles['media-type']}>
+              <button
+                type="button"
+                className={mediaTypeVisible ? styles.active : ''}
+                ref={mediaTypeRef}
+                onClick={e => {
+                  e.stopPropagation();
 
-                    toggleMediaType();
-                  }}
-                >
-                  All
-                </button>
-                {mediaTypeVisible && (
-                  <div>
-                    <button type="button" onClick={() => handleMediaTypeChange('movie')}>
-                      Movies <span>{movieCount}</span>
-                    </button>
-                    <button type="button" onClick={() => handleMediaTypeChange('tv')}>
-                      TV Shows <span>{tvCount}</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div className={styles.department}>
-                <button
-                  type="button"
-                  className={departmentTypeVisible ? styles.active : ''}
-                  ref={departmentTypeRef}
-                  onClick={e => {
-                    e.stopPropagation();
-
-                    toggleDepartmentType();
-                  }}
-                >
-                  Department
-                </button>
-                {departmentTypeVisible && (
-                  <div>
-                    {departmentsList.map((item, index) => (
-                      <button
-                        type="button"
-                        key={index}
-                        onClick={() => handleDepartmentTypeChange(item[0])}
-                      >
-                        {item[0]} <span>{item[1]}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+                  toggleMediaType();
+                }}
+              >
+                All
+              </button>
+              {mediaTypeVisible && (
+                <div>
+                  <button type="button" onClick={() => handleMediaTypeChange('movie')}>
+                    Movies <span>{movieCount}</span>
+                  </button>
+                  <button type="button" onClick={() => handleMediaTypeChange('tv')}>
+                    TV Shows <span>{tvCount}</span>
+                  </button>
+                </div>
+              )}
             </div>
-            {departmentsArray.map(department => (
-              <div key={department[0]} className={styles['department-container']}>
-                <h3>{department[0]}</h3>
-                <Department department={department[0]} cast={castData} crew={crewData} />
-              </div>
-            ))}
-          </>
-        ))}
-      {noResults && <p>{loading ? <LoaderSmall /> : name} doesn't have any credits.</p>}
+            <div className={styles.department}>
+              <button
+                type="button"
+                className={departmentTypeVisible ? styles.active : ''}
+                ref={departmentTypeRef}
+                onClick={e => {
+                  e.stopPropagation();
+
+                  toggleDepartmentType();
+                }}
+              >
+                Department
+              </button>
+              {departmentTypeVisible && (
+                <div>
+                  {departmentsList.map((item, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      onClick={() => handleDepartmentTypeChange(item[0])}
+                    >
+                      {item[0]} <span>{item[1]}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          {departmentsArray.map(department => (
+            <div key={department[0]} className={styles['department-container']}>
+              <h3>{department[0]}</h3>
+              <Department department={department[0]} cast={castData} crew={crewData} />
+            </div>
+          ))}
+        </>
+      ) : (
+        <p>{name} doesn't have any credits.</p>
+      )}
     </div>
   );
 };
 
 Credits.propTypes = {
-  loading: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   knownForDepartment: PropTypes.string.isRequired,
-  creditsLoading: PropTypes.bool.isRequired,
   creditsData: PropTypes.shape({}).isRequired,
   movieCount: PropTypes.number.isRequired,
   tvCount: PropTypes.number.isRequired,
