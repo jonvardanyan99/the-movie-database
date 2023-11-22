@@ -99,16 +99,6 @@ export const Overview = ({
               />
             </div>
           )}
-          <div className={styles['now-streaming']}>
-            <img
-              src="https://www.themoviedb.org/t/p/original/d3ixI1no0EpTj2i7u0Sd2DBXVlG.jpg"
-              alt="img"
-            />
-            <div>
-              <h4>Now Streaming</h4>
-              <h3>Watch Now</h3>
-            </div>
-          </div>
         </div>
         <div className={styles['film-info']}>
           <h2>
