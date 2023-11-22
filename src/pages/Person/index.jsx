@@ -268,67 +268,6 @@ export const Person = () => {
             <p>
               {data?.biography ? data.biography : `We don't have a biography for ${data?.name}.`}
             </p>
-            <section>
-              <h3>Known For</h3>
-              <div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-                <div>
-                  <img
-                    src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/9PFonBhy4cQy7Jz20NpMygczOkv.jpg"
-                    alt="Wednesday"
-                  />
-                  <h4>Wednesday</h4>
-                </div>
-              </div>
-            </section>
             <Credits
               name={data?.name || ''}
               knownForDepartment={data?.known_for_department || ''}
