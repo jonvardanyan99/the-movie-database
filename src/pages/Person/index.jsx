@@ -9,9 +9,44 @@ import styles from './styles.module.scss';
 
 export const Person = () => {
   const params = useParams();
+
   const { loading, data } = useQuery({
     url: `/person/${params.id}`,
     params: '&language=en-US&append_to_response=external_ids',
+  });
+
+  const { loading: creditsLoading, data: creditsData } = useQuery({
+    url: `/person/${params.id}/combined_credits`,
+    params: '&language=en-US',
+  });
+
+  const movieCount = new Set();
+  const tvCount = new Set();
+
+  creditsData?.cast.forEach(item => {
+    const movieTitle = item.title;
+    const tvName = item.name;
+
+    if (movieTitle) {
+      movieCount.add(movieTitle);
+    }
+
+    if (tvName) {
+      tvCount.add(tvName);
+    }
+  });
+
+  creditsData?.crew.forEach(item => {
+    const movieTitle = item.title;
+    const tvName = item.name;
+
+    if (movieTitle) {
+      movieCount.add(movieTitle);
+    }
+
+    if (tvName) {
+      tvCount.add(tvName);
+    }
   });
 
   const currentDate = new Date();
@@ -178,7 +213,7 @@ export const Person = () => {
           <h4>Known For</h4>
           <p>{data?.known_for_department}</p>
           <h4>Known Credits</h4>
-          <p>49</p>
+          <p>{movieCount.size + tvCount.size}</p>
           <h4>Gender</h4>
           <p>{data?.gender === 1 ? 'Female' : 'Male'}</p>
           <h4>Birthday</h4>
@@ -301,6 +336,10 @@ export const Person = () => {
           loading={loading}
           name={data?.name || ''}
           knownForDepartment={data?.known_for_department || ''}
+          creditsLoading={creditsLoading}
+          creditsData={creditsData || {}}
+          movieCount={movieCount.size}
+          tvCount={tvCount.size}
         />
       </article>
     </div>

@@ -1,15 +1,20 @@
 import PropTypes from 'prop-types';
 import { React, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import { Loader } from '../../../../components/Loader';
 import { LoaderSmall } from '../../../../components/Loader/LoaderSmall';
-import { useQuery } from '../../../../hooks/useQuery';
 import { Department } from './components/Department';
 import styles from './styles.module.scss';
 
-export const Credits = ({ loading, name, knownForDepartment }) => {
-  const params = useParams();
+export const Credits = ({
+  loading,
+  name,
+  knownForDepartment,
+  creditsLoading,
+  creditsData,
+  movieCount,
+  tvCount,
+}) => {
   const [mediaTypeVisible, setMediaTypeVisible] = useState(false);
   const [departmentTypeVisible, setDepartmentTypeVisible] = useState(false);
   const [mediaType, setMediaType] = useState('all');
@@ -17,37 +22,32 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
   const mediaTypeRef = useRef();
   const departmentTypeRef = useRef();
 
-  const { loading: creditsLoading, data } = useQuery({
-    url: `/person/${params.id}/combined_credits`,
-    params: '&language=en-US',
-  });
-
-  if (data?.cast.length > 0) {
-    for (let i = 0; i <= data.cast.length - 2; i++) {
-      for (let j = i + 1; j <= data.cast.length - 1; j++) {
-        if (data.cast[i].id === data.cast[j].id) {
-          if ('episode_count' in data.cast[i] && 'episode_count' in data.cast[j]) {
-            data.cast[i].secondEpisodeCount = data.cast[j].episode_count;
+  if (creditsData.cast?.length > 0) {
+    for (let i = 0; i <= creditsData.cast.length - 2; i++) {
+      for (let j = i + 1; j <= creditsData.cast.length - 1; j++) {
+        if (creditsData.cast[i].id === creditsData.cast[j].id) {
+          if ('episode_count' in creditsData.cast[i] && 'episode_count' in creditsData.cast[j]) {
+            creditsData.cast[i].secondEpisodeCount = creditsData.cast[j].episode_count;
           }
 
-          if ('character' in data.cast[i] && 'character' in data.cast[j]) {
-            data.cast[i].secondCharacter = data.cast[j].character;
+          if ('character' in creditsData.cast[i] && 'character' in creditsData.cast[j]) {
+            creditsData.cast[i].secondCharacter = creditsData.cast[j].character;
           }
 
-          data.cast.splice(j, 1);
+          creditsData.cast.splice(j, 1);
           break;
         }
       }
     }
   }
 
-  if (data?.crew.length > 0) {
-    for (let i = 0; i <= data.crew.length - 2; i++) {
+  if (creditsData.crew?.length > 0) {
+    for (let i = 0; i <= creditsData.crew.length - 2; i++) {
       let k = 1;
 
-      for (let j = i + 1; j <= data.crew.length - 1; j++) {
-        if (data.crew[i].id === data.crew[j].id) {
-          data.crew[j].id += k;
+      for (let j = i + 1; j <= creditsData.crew.length - 1; j++) {
+        if (creditsData.crew[i].id === creditsData.crew[j].id) {
+          creditsData.crew[j].id += k;
           k++;
         }
       }
@@ -105,43 +105,18 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
 
   let noResults = false;
 
-  if (data?.cast.length === 0 && data?.crew.length === 0) {
+  if (creditsData.cast?.length === 0 && creditsData.crew?.length === 0) {
     noResults = true;
   }
 
-  const movieCount = new Set();
-  const tvCount = new Set();
-
-  data?.cast.forEach(item => {
-    const movieTitle = item.title;
-    const tvName = item.name;
-
-    if (movieTitle) {
-      movieCount.add(movieTitle);
-    }
-
-    if (tvName) {
-      tvCount.add(tvName);
-    }
-  });
-
-  data?.crew.forEach(item => {
-    const movieTitle = item.title;
-    const tvName = item.name;
-
-    if (movieTitle) {
-      movieCount.add(movieTitle);
-    }
-
-    if (tvName) {
-      tvCount.add(tvName);
-    }
-  });
-
   const castData =
-    mediaType === 'all' ? data?.cast : data.cast.filter(item => item.media_type === mediaType);
+    mediaType === 'all'
+      ? creditsData.cast
+      : creditsData.cast.filter(item => item.media_type === mediaType);
   const crewData =
-    mediaType === 'all' ? data?.crew : data.crew.filter(item => item.media_type === mediaType);
+    mediaType === 'all'
+      ? creditsData.crew
+      : creditsData.crew.filter(item => item.media_type === mediaType);
 
   const crewDepartments = [...new Set(crewData?.map(item => item.department))];
 
@@ -151,8 +126,8 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
     return [department, departmentCount];
   });
 
-  if (data?.cast.length > 0) {
-    departmentsArray.push(['Acting', castData?.length]);
+  if (creditsData.cast?.length > 0) {
+    departmentsArray.push(['Acting', castData.length]);
   }
 
   departmentsArray.sort(([, lengthA], [, lengthB]) => lengthB - lengthA);
@@ -168,16 +143,16 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
     departmentsArray = [departmentsArray.find(item => item[0] === departmentType)];
   }
 
-  const crewDepartmentsList = [...new Set(data?.crew.map(item => item.department))];
+  const crewDepartmentsList = [...new Set(creditsData.crew?.map(item => item.department))];
 
   const departmentsList = crewDepartmentsList.map(department => {
-    const departmentCount = data?.crew.filter(item => item.department === department).length;
+    const departmentCount = creditsData.crew.filter(item => item.department === department).length;
 
     return [department, departmentCount];
   });
 
-  if (data?.cast.length > 0) {
-    departmentsList.push(['Acting', castData?.length]);
+  if (creditsData.cast?.length > 0) {
+    departmentsList.push(['Acting', castData.length]);
   }
 
   departmentsList.sort(([, lengthA], [, lengthB]) => lengthB - lengthA);
@@ -211,10 +186,10 @@ export const Credits = ({ loading, name, knownForDepartment }) => {
                 {mediaTypeVisible && (
                   <div>
                     <button type="button" onClick={() => handleMediaTypeChange('movie')}>
-                      Movies <span>{movieCount.size}</span>
+                      Movies <span>{movieCount}</span>
                     </button>
                     <button type="button" onClick={() => handleMediaTypeChange('tv')}>
-                      TV Shows <span>{tvCount.size}</span>
+                      TV Shows <span>{tvCount}</span>
                     </button>
                   </div>
                 )}
@@ -264,4 +239,8 @@ Credits.propTypes = {
   loading: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   knownForDepartment: PropTypes.string.isRequired,
+  creditsLoading: PropTypes.bool.isRequired,
+  creditsData: PropTypes.shape({}).isRequired,
+  movieCount: PropTypes.number.isRequired,
+  tvCount: PropTypes.number.isRequired,
 };
