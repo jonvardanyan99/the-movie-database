@@ -38,14 +38,14 @@ export const Percentage = ({ percent, className }) => {
       step(state, circle) {
         circle.path.setAttribute('stroke', state.color);
 
-        const value = Math.round(circle.value());
+        const value = Math.round(circle.value() * 100);
         circle.setText(
           `<span>${value}<sup style="font-size: 12px; margin-left: 1px">%</sup></span>`,
         );
       },
     });
 
-    bar.animate(percent);
+    bar.animate(percent / 100);
 
     return () => {
       bar.destroy();
