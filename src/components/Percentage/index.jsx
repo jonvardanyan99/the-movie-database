@@ -11,7 +11,7 @@ export const Percentage = ({ percent, className }) => {
     containerRef.current.classList.add(styles['percentage-circle'], className);
 
     const bar = new Circle(containerRef.current, {
-      strokeWidth: 7,
+      strokeWidth: 12,
       trailWidth: 15,
       trailColor: '#081c22',
       easing: 'easeInOut',
