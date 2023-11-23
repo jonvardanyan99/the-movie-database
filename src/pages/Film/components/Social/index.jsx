@@ -29,6 +29,13 @@ export const Social = ({ loading, name }) => {
     }
   }, [data]);
 
+  const avatar = review.author_details?.avatar_path && (
+    <img
+      src={`https://www.themoviedb.org/t/p/w64_and_h64_face${review.author_details.avatar_path}`}
+      alt={review.author_details.name || review.author_details.username}
+    />
+  );
+
   return (
     <div className={styles.social}>
       {reviewsLoading ? (
@@ -65,10 +72,7 @@ export const Social = ({ loading, name }) => {
                         alt={review.author_details.name || review.author_details.username}
                       />
                     ) : (
-                      <img
-                        src={`https://www.themoviedb.org/t/p/w64_and_h64_face${review.author_details.avatar_path}`}
-                        alt={review.author_details.name || review.author_details.username}
-                      />
+                      avatar
                     )}
                     <div>
                       <div>
