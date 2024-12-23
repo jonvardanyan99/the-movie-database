@@ -117,49 +117,43 @@ export const Social = ({ loading, name }) => {
               <div>
                 <div>
                   <div>
-                    <img
-                      src="https://www.themoviedb.org/t/p/w45_and_h45_face/tgflUBCItxISJnlnXmRj7dP6wGk.jpg"
-                      alt="lennonforever"
-                    />
-                    <h4>Let's face it, Jessica Lange made...</h4>
+                    <div>A</div>
+                    <h4>Lorem ipsum dolor sit amet, consectetur.</h4>
                   </div>
                   <p>Open</p>
                   <span>11</span>
                   <div>
                     <p>14 Feb 2019 at 8:06 AM</p>
                     <p>
-                      by <span>stugood</span>
+                      by <span>A</span>
                     </p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <div>D</div>
-                    <h4>I don't see the two kids at the end giving birth to it.</h4>
+                    <div>B</div>
+                    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
                   </div>
                   <p>Open</p>
                   <span>0</span>
                   <div>
                     <p>28 Nov 2018 at 12:37 AM</p>
                     <p>
-                      by <span>Drew007</span>
+                      by <span>B</span>
                     </p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <img
-                      src="https://www.themoviedb.org/t/p/w45_and_h45_face/m1jBH4CEEdBarS7kjaRes5N4nLP.jpg"
-                      alt="Oldnewbie"
-                    />
-                    <h4>Back from the Abyss...</h4>
+                    <div>C</div>
+                    <h4>Lorem ipsum dolor.</h4>
                   </div>
                   <p>Open</p>
                   <span>0</span>
                   <div>
                     <p>17 Nov 2018 at 6:59 AM</p>
                     <p>
-                      by <span>Oldnewbie</span>
+                      by <span>C</span>
                     </p>
                   </div>
                 </div>
