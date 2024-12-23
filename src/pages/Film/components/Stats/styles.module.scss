@@ -26,22 +26,6 @@
     }
   }
 
-  > div:nth-of-type(4) {
-    div:first-child {
-      background-color: rgb(1, 210, 119);
-      width: 45px;
-      height: 45px;
-      font-size: 19px;
-      font-weight: 400;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      margin: 0;
-    }
-  }
-
   > p {
     margin-bottom: 30px;
   }
@@ -55,14 +39,36 @@
     align-items: center;
     margin-bottom: 20px;
 
-    > img {
+    > div:first-child {
       width: 45px;
       height: 45px;
-      object-fit: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 19px;
+      font-weight: 400;
+      color: white;
       border-radius: 50%;
+      margin: 0;
     }
 
-    > div {
+    > .a-contributor {
+      background-color: rgb(210, 144, 1);
+    }
+
+    > .b-contributor {
+      background-color: rgb(1, 119, 210);
+    }
+
+    > .c-contributor {
+      background-color: rgb(128, 91, 231);
+    }
+
+    > .d-contributor {
+      background-color: rgb(1, 210, 119);
+    }
+
+    > div:last-child {
       display: flex;
       flex-direction: column;
       margin-left: 10px;
